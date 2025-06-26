@@ -1,0 +1,33 @@
+<div class="header">
+  <div class="header-top">
+    <div class="login-container">
+      <a class="login" mat-flat-button [routerLink]="['/register']">Regisztráció</a>
+      <a class="login" mat-flat-button [routerLink]="['/login']">Bejelentkezés</a>
+    </div>
+    <div class="flags-container">
+      <img class="flag" src="images/hu-flag-icon.png">
+      <img class="flag" src="images/sk-flag-icon.png">
+      <img class="flag" src="images/uk-flag-icon.png">
+    </div>
+  </div>
+
+  <div class="headings-first">
+    <h3>OLASZ STÍLUSÚ PIZZÁK</h3>
+  </div>
+
+  <div class="headings-second">
+    <h1>PETER'S PIZZA</h1>
+    <a>Keszegfalva, Duna sor 954</a>
+  </div>
+
+  <div class="hero">
+    <div class="buttons">
+      <div class="button">
+        <a mat-flat-button (click)="log()" class="menuBtn">ÉTLAP</a>
+      </div>
+      <div class="button">
+        <a mat-flat-button [routerLink]="['/order']" class="orderBtn">RENDELÉS</a>
+      </div>
+    </div>
+  </div>
+</div>

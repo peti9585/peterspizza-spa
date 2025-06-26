@@ -1,0 +1,44 @@
+<img src="images/vine-decor.svg" class="vine-left" />
+<img src="images/vine-decor.svg" class="vine-right" />
+
+<h1>PETER'S PIZZA</h1>
+<hr class="hr-top">
+<div class="order-cart">
+  <a class="material-symbols-outlined">shopping_cart</a>
+  @if(orderNumber > 0) { <a class="order-number">({{orderNumber}})</a> }
+</div>
+
+<div class="pizza-cards">
+  <div>
+    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  </div>
+  <div>
+    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  </div>
+  <div>
+    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  </div>
+  <div>
+    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  </div>
+  <div>
+    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  </div>
+  <div>
+    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  </div>
+  <div>
+    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  </div>
+</div>
+
+<hr class="hr-bottom">
+
+<div class="buttons">
+  <div class="button">
+    <button mat-flat-button [routerLink]="['/home']">Vissza</button>
+  </div>
+  <div class="button">
+    <button mat-flat-button [routerLink]="['/cart']">Kosár véglegesítése</button>
+  </div>
+</div>

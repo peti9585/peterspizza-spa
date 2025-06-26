@@ -1,0 +1,46 @@
+.desc {
+  display: flex;
+  flex-direction: row;
+}
+
+.desc-item img {
+  width: calc(50vw - 108px);
+  object-fit: cover;
+  height: 700px;
+}
+
+.desc-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.desc-item h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text-dark-red);
+}
+
+.desc-item h3, p {
+  margin-left: var(--margin-default);
+  margin-right: var(--margin-default);
+}
+
+.mat-mdc-unelevated-button {
+  padding: 30px 110px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  .desc {
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .desc-item.mindfulness-image {
+    order: -1;
+  }
+}

@@ -1,0 +1,77 @@
+<h1>REGISZTRÁCIÓ</h1>
+<hr class="hr-top">
+
+<form class="registration-form" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <mat-label>Keresztnév</mat-label>
+      <input matInput id="firstName" type="text" formControlName="firstName">
+      @if (reactiveForm.get('firstName')!.hasError('required')) {
+        <mat-error>A keresztnév <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Vezetéknév</mat-label>
+      <input matInput id="lastName" type="text" formControlName="lastName">
+      @if (reactiveForm.get('lastName')!.hasError('required')) {
+        <mat-error>A vezetéknév <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input matInput id="email" type="email" formControlName="email">
+      @if (reactiveForm.get('email')!.hasError('required')) {
+        <mat-error>Az e-mail <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Telefonszám</mat-label>
+      <input matInput id="phoneNumber" type="text" formControlName="phoneNumber">
+      @if (reactiveForm.get('phoneNumber')!.hasError('required')) {
+        <mat-error>A telefonszám <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Felhasználónév</mat-label>
+      <input matInput id="userName" type="text" formControlName="userName">
+      @if (reactiveForm.get('userName')!.hasError('required')) {
+        <mat-error>A felhasználónév <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Jelszó</mat-label>
+      <input matInput id="password" type="password" formControlName="password">
+      @if (reactiveForm.get('password')!.hasError('required')) {
+        <mat-error>A jelszó <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <hr class="hr-top">
+
+  <div class="buttons">
+    <div>
+      <button mat-flat-button [routerLink]="['/home']">Vissza</button>
+    </div>
+    <div>
+      <button mat-flat-button type="submit" [disabled]="reactiveForm.invalid" (click)="onRegister()">
+        Regisztráció
+      </button>
+    </div>
+  </div>
+</form>

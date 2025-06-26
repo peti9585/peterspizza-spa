@@ -1,0 +1,115 @@
+.hr-top {
+  border-width: 0;
+  background-color: var(--text-dark-red);
+  width: 25%;
+  height: 5px;
+  margin-bottom: 35px;
+}
+
+.table-container {
+  min-width: 360px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.table-container table {
+  width: 100%;
+  background-color: var(--primary-button);
+}
+
+.mat-mdc-header-cell {
+  border-bottom-color: white;
+}
+
+.mat-mdc-row .remove-button,
+.mat-mdc-row .increase-button,
+.mat-mdc-row .decrease-button {
+  visibility: hidden;
+}
+
+.mat-mdc-row:hover .remove-button,
+.mat-mdc-row:hover .increase-button,
+.mat-mdc-row:hover .decrease-button {
+  visibility: visible;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mat-mdc-header-cell, .mat-mdc-cell {
+  text-align: center;
+}
+
+.mat-mdc-cell {
+  border-bottom: none !important;
+}
+
+.mat-mdc-header-row, .mat-mdc-row {
+  color: white;
+}
+
+.increase-button, .remove-button, .decrease-button {
+  background: none;
+  border: none;
+}
+
+.increase-button mat-icon {
+  color: white;
+  background-color: forestgreen;
+  border-radius: 50%;
+}
+
+.decrease-button mat-icon, .remove-button mat-icon {
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.summary-p {
+  background-color: var(--primary-button);
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 200px;
+}
+
+.cart-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cart-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.order-buttons button {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.quantity-elements {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--text-dark-red);
+}
+
+@media (hover: none) {
+  .mat-mdc-row .remove-button,
+  .mat-mdc-row .increase-button,
+  .mat-mdc-row .decrease-button {
+    visibility: visible;
+  }
+}

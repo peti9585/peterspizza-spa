@@ -1,0 +1,12 @@
+.modal-content {
+  margin: 50px;
+  text-align: center;
+}
+
+.modal-content button {
+  margin-top: 10px;
+}
+
+.mat-mdc-dialog-title {
+  color: var(--text-dark-red) !important;
+}

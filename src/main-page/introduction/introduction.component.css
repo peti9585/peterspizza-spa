@@ -1,0 +1,42 @@
+.intro {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-top: var(--margin-default);
+  margin-bottom: var(--margin-default);
+}
+
+.intro-text {
+  margin-top: var(--margin-default);
+  margin-left: 250px;
+  margin-right: 250px;
+}
+
+.intro-text h2 {
+  font-size: 40px;
+}
+
+.intro-image {
+  margin-right: var(--margin-default);
+}
+
+.intro-image img {
+  height: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .intro {
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .intro-text {
+    width: calc(100% - 10px);
+  }
+
+  .intro-image {
+    margin: auto;
+  }
+}

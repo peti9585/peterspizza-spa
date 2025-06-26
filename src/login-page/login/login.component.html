@@ -1,0 +1,35 @@
+<h1>BEJELENTKEZÉS</h1>
+<hr class="hr-top">
+
+<form class="login-form" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <mat-label>Felhasználónév</mat-label>
+      <input matInput id="userName" type="text" formControlName="userName">
+      @if (reactiveForm.get('userName')!.hasError('required')) {
+        <mat-error>A felhasználónév <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Jelszó</mat-label>
+      <input matInput id="password" type="password" formControlName="password">
+      @if (reactiveForm.get('password')!.hasError('required')) {
+        <mat-error>A jelszó <strong>kötelező</strong></mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <hr class="hr-top">
+
+  <div class="buttons">
+    <div>
+      <button mat-flat-button [routerLink]="['/home']">Vissza</button>
+    </div>
+    <div>
+      <button mat-flat-button type="submit" [disabled]="reactiveForm.invalid">Bejelentkezés</button>
+    </div>
+  </div>
+</form>

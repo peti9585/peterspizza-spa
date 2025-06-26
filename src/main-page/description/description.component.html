@@ -1,0 +1,23 @@
+<div class="desc">
+  @if (imageFirst) {
+    <div class="desc-item">
+      <img ngSrc="{{imageSource}}" width="200" height="200" priority>
+    </div>
+    <div class="desc-item">
+      <h3>{{headingText}}</h3>
+      <p>{{paragraphText}}</p>
+      @if (componentType === ComponentType.Takeaway) {
+        <a mat-flat-button>Étlap</a>
+        <a mat-flat-button [routerLink]="['/order']">Rendelés</a>
+      }
+    </div>
+  }@else {
+    <div class="desc-item">
+      <h3>{{headingText}}</h3>
+      <p>{{paragraphText}}</p>
+    </div>
+    <div class="desc-item" [ngClass]="{'mindfulness-image': componentType === ComponentType.Mindfulness}">
+      <img ngSrc="{{imageSource}}" width="200" height="200" priority>
+    </div>
+  }
+</div>

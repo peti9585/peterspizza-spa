@@ -1,0 +1,119 @@
+.header-top {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.flags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.login-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.flag {
+  width: 4vh;
+  height: 3vh;
+}
+
+.login {
+  width: fit-content;
+  height: 25px;
+}
+
+.headings-first {
+  top: 20px;
+}
+
+.headings-second {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.headings-second h1 {
+  margin-top: 0;
+}
+
+.headings-second a {
+  margin-left: auto;
+}
+
+.hero {
+  position: relative;
+  background-image: url('../../../public/images/pizza.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  text-align: center;
+  color: white;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  width: 25%;
+  height: 40%;
+  margin-left: var(--margin-default);
+  margin-bottom: 50px;
+}
+
+.orderBtn, .menuBtn {
+  max-width: 100%;
+  background-color: var(--primary-button);
+  font-size: 15px;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+  border: none;
+}
+
+.orderBtn {
+  padding: 15px 110px;
+  white-space: nowrap;
+}
+
+.menuBtn {
+  padding: 15px 126px;
+}
+
+.button .mat-mdc-unelevated-button {
+  padding: 30px 110px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1300px) {
+  .orderBtn, .menuBtn {
+    padding: 10px 15px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .orderBtn, .menuBtn {
+    display: none;
+  }
+
+  .buttons {
+    position: relative;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 853px) {
+  .headings-second {
+    justify-content: center;
+  }
+  .headings-second a {
+    margin-left: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
