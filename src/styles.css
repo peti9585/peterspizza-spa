@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --background: #F8F2DE;
+  --text-dark-red: #A31D1D;
+  --primary-button: #D66049;
+  --margin-default: 100px;
+}
+
+@font-face {
+  font-family: 'TT Mussels';
+  src: url('../public/fonts/ttmussels.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.mat-mdc-unelevated-button {
+  background-color: var(--primary-button) !important;
+}
+
+body {
+  background-color: var(--background);
+  font-family: 'TT Mussels', sans-serif;
+  margin-left: var(--margin-default);
+  margin-right: var(--margin-default);
+}
+
+a, h2, h3, p {
+  color: var(--primary-button);
+}
+
+h1 {
+  font-size: 8vh;
+  word-wrap: break-word;
+  color: var(--text-dark-red);
+}
