@@ -7,7 +7,7 @@
       <mat-label>Keresztnév</mat-label>
       <input matInput id="firstName" type="text" formControlName="firstName">
       @if (reactiveForm.get('firstName')!.hasError('required')) {
-        <mat-error>A keresztnév kitöltése <strong>kötelező</strong></mat-error>
+        <mat-error>A keresztnév <strong>kötelező</strong></mat-error>
       }
     </mat-form-field>
   </div>
@@ -17,7 +17,7 @@
       <mat-label>Vezetéknév</mat-label>
       <input matInput id="lastName" type="text" formControlName="lastName">
       @if (reactiveForm.get('lastName')!.hasError('required')) {
-        <mat-error>A vezetéknév kitöltése <strong>kötelező</strong></mat-error>
+        <mat-error>A vezetéknév <strong>kötelező</strong></mat-error>
       }
     </mat-form-field>
   </div>
@@ -27,7 +27,7 @@
       <mat-label>E-mail</mat-label>
       <input matInput id="email" type="email" formControlName="email">
       @if (reactiveForm.get('email')!.hasError('required')) {
-        <mat-error>Az e-mail kitöltése <strong>kötelező</strong></mat-error>
+        <mat-error>Az e-mail <strong>kötelező</strong></mat-error>
       }
     </mat-form-field>
   </div>
@@ -37,7 +37,7 @@
       <mat-label>Telefonszám</mat-label>
       <input matInput id="phoneNumber" type="text" formControlName="phoneNumber">
       @if (reactiveForm.get('phoneNumber')!.hasError('required')) {
-        <mat-error>A telefonszám kitöltése <strong>kötelező</strong></mat-error>
+        <mat-error>A telefonszám <strong>kötelező</strong></mat-error>
       }
     </mat-form-field>
   </div>
