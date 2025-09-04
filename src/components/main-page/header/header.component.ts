@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
 
@@ -9,7 +9,4 @@ import {RouterLink} from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  public log() {
-    console.log('click works');
-  }
 }

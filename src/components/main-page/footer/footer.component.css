@@ -12,7 +12,7 @@
 }
 
 .icon {
-  background: url("../../../public/images/pizza-icon.png");
+  background: url("../../../../public/images/pizza-icon.png");
   background-size: contain;
   height: 150px;
   width: 150px;
