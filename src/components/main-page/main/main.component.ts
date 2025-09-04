@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AboutComponent} from "../about/about.component";
 import {ComponentType, DescriptionComponent} from "../description/description.component";
 import {FooterComponent} from "../footer/footer.component";
@@ -17,7 +17,7 @@ import {IntroductionComponent} from "../introduction/introduction.component";
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent {
+export class MainComponent{
 
   protected readonly ComponentType = ComponentType;
 }

@@ -49,7 +49,7 @@
 
 .hero {
   position: relative;
-  background-image: url('../../../public/images/pizza.jpg');
+  background-image: url('../../../../public/images/pizza.jpg');
   background-size: cover;
   background-position: center;
   height: 400px;
