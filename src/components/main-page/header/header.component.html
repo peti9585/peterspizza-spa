@@ -1,8 +1,13 @@
 <div class="header">
   <div class="header-top">
     <div class="login-container">
-      <a class="login" mat-flat-button [routerLink]="['/register']">Regisztráció</a>
-      <a class="login" mat-flat-button [routerLink]="['/login']">Bejelentkezés</a>
+      @if (isLoggedIn) {
+        <p class="firstname">Üdv, <b>{{userFirstName}}</b></p>
+        <a class="logout" mat-flat-button (click)="logout()" >Kijelentkezés</a>
+      } @else {
+        <a class="login" mat-flat-button [routerLink]="['/register']">Regisztráció</a>
+        <a class="login" mat-flat-button [routerLink]="['/login']">Bejelentkezés</a>
+      }
     </div>
     <div class="flags-container">
       <img class="flag" src="images/hu-flag-icon.png">
@@ -26,7 +31,12 @@
         <a mat-flat-button class="menuBtn">ÉTLAP</a>
       </div>
       <div class="button">
-        <a mat-flat-button [routerLink]="['/order']" class="orderBtn">RENDELÉS</a>
+        <a mat-flat-button
+           [disabled]="!isLoggedIn"
+           [matTooltip]="'Kérlek jelentkezz be.'"
+           [matTooltipDisabled]="isLoggedIn"
+           [routerLink]="['/order']"
+           class="orderBtn">RENDELÉS</a>
       </div>
     </div>
   </div>

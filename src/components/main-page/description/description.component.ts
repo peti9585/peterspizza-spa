@@ -3,6 +3,7 @@ import {NgClass, NgOptimizedImage} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 export enum ComponentType {
   ItalianTaste,
@@ -16,6 +17,7 @@ export enum ComponentType {
     NgOptimizedImage,
     NgClass,
     MatButtonModule,
+    MatTooltipModule,
     RouterLink
   ],
   templateUrl: './description.component.html',
@@ -62,7 +64,11 @@ export class DescriptionComponent implements OnInit {
     }
   }
 
-  temp() {
-    this.authService.isLoggedIn();
+  get isLoggedIn(): boolean {
+    return this.authService.getToken() !== null;
+  }
+
+  get userFirstName(): string | null {
+    return this.isLoggedIn ? this.authService.getUserFirstName() : null;
   }
 }

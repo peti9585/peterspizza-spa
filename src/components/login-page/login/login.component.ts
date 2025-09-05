@@ -51,8 +51,6 @@ export class LoginComponent {
             this.toasterService.error('Hiba történt a bejelentkezés során!', 'Hiba');
         }
       });
-    } else {
-      console.log('Form not valid');
     }
   }
 

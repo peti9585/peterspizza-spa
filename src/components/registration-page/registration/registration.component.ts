@@ -45,7 +45,7 @@ export class RegistrationComponent {
       lastName: ['', Validators.required],
       userName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{7,}$')]],
       password: ['', Validators.required],
     });
   }
@@ -68,8 +68,6 @@ export class RegistrationComponent {
           }
         }
       });
-    } else {
-      console.log('Form not valid');
     }
   }
 
