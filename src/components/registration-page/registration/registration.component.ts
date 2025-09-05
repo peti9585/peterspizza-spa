@@ -3,9 +3,9 @@ import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, V
 import {MatButton} from '@angular/material/button';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {Router, RouterLink} from '@angular/router';
-import {UserService} from '../../../services/user.service';
 import {IRegistrationData} from '../../../interfaces/interfaces-global';
 import {ToastrService} from 'ngx-toastr';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   imports: [
@@ -35,7 +35,7 @@ export class RegistrationComponent {
   }>;
 
   private readonly formBuilder = inject(FormBuilder);
-  private readonly userService = inject(UserService);
+  private readonly authService = inject(AuthenticationService);
   private readonly toasterService = inject(ToastrService);
   private readonly router = inject(Router);
 
@@ -54,7 +54,7 @@ export class RegistrationComponent {
     if (this.reactiveForm.valid) {
       const registrationData: IRegistrationData = this.reactiveForm.value as IRegistrationData;
 
-      this.userService.submitRegistration(registrationData).subscribe({
+      this.authService.submitRegistration(registrationData).subscribe({
         next: (response) => {
           this.toasterService.success('Sikeresen regisztráltál az oldalra!', 'Sikeres regisztráció');
 

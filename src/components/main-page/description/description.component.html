@@ -7,7 +7,7 @@
       <h3>{{headingText}}</h3>
       <p>{{paragraphText}}</p>
       @if (componentType === ComponentType.Takeaway) {
-        <a mat-flat-button>Étlap</a>
+        <a mat-flat-button (click)="temp()">Étlap</a>
         <a mat-flat-button [routerLink]="['/order']">Rendelés</a>
       }
     </div>
