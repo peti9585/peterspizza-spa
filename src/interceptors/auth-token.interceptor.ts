@@ -1,32 +1,36 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import {AuthenticationService} from '../services/authentication.service';
 import {inject} from '@angular/core';
-import {catchError, throwError} from 'rxjs';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
+import {catchError, switchMap, throwError} from 'rxjs';
 
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthenticationService);
-  const router = inject(Router);
-  const toasterService = inject(ToastrService);
+  const jwtToken = authService.getJwtToken();
 
-  const token = authService.getToken();
-
-  if (token) {
+  if (jwtToken) {
     const newReq = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${jwtToken}`
       }
     });
 
     return next(newReq).pipe(
       catchError(error => {
-        if (error.status === 401){
-          authService.logout();
+        if (error.status === 401) {
+          return authService.refreshTokens().pipe(
+            switchMap((response) => {
+              const newReqWithNewJwt = req.clone({
+                setHeaders: {
+                  Authorization: `Bearer ${response.jwtToken}`
+                }
+              });
+              return next(newReqWithNewJwt);
+            }),
+            catchError((refreshError) => {
+              return throwError(() => refreshError);
+            })
+          );
         }
-
-        router.navigate(['/login']);
-        toasterService.info('A munkamenet lejárt, kérlek jelentkezz be újra', 'Figyelem!');
         return throwError(() => error);
       })
     );

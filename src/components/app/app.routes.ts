@@ -8,13 +8,14 @@ import {
 } from '../personal-details-page/personal-details-main/personal-details-main.component';
 import {RegistrationComponent} from '../registration-page/registration/registration.component';
 import {LoginComponent} from '../login-page/login/login.component';
+import {authGuard} from '../../guards/auth.guard';
 
 export const routes: Routes = [
   { path: 'home', component: MainComponent },
-  { path: 'order', component: OrderMainComponent },
-  { path: 'cart', component: CartMainComponent },
+  { path: 'order', component: OrderMainComponent, canActivate: [authGuard] },
+  { path: 'cart', component: CartMainComponent, canActivate: [authGuard] },
   { path: '404', component: NotfoundComponent },
-  { path: 'order-confirmation', component: PersonalDetailsMainComponent },
+  { path: 'order-confirmation', component: PersonalDetailsMainComponent, canActivate: [authGuard] },
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
 

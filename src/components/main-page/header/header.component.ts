@@ -14,12 +14,8 @@ export class HeaderComponent {
   private readonly authService = inject(AuthenticationService);
   private readonly router = inject(Router);
 
-  constructor() {
-    console.log('logged in? ' + this.isLoggedIn);
-  }
-
   get isLoggedIn(): boolean {
-    return this.authService.getToken() !== null;
+    return this.authService.getJwtToken() !== null;
   }
 
   get userFirstName(): string | null {

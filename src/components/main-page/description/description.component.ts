@@ -65,7 +65,7 @@ export class DescriptionComponent implements OnInit {
   }
 
   get isLoggedIn(): boolean {
-    return this.authService.getToken() !== null;
+    return this.authService.getJwtToken() !== null;
   }
 
   get userFirstName(): string | null {

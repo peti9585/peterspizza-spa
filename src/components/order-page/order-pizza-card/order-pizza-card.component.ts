@@ -1,6 +1,7 @@
-import {Component, output} from '@angular/core';
+import {Component, Input, output} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltip} from '@angular/material/tooltip';
+import {IGetPizzaResponse} from '../../../interfaces/interfaces-global';
 
 @Component({
   selector: 'app-order-pizza-card',
@@ -13,16 +14,16 @@ import {MatTooltip} from '@angular/material/tooltip';
 })
 export class OrderPizzaCardComponent {
   addToCartEvent = output<number>();
-  fullText: string = "lorem ipsum lorem. lorem ipsum lorem. lorem ipsum lorem.lorem ipsum lorem. lorem ipsum lorem. lorem ipsum lorem.lorem ipsum lorem. lorem ipsum lorem. lorem ipsum lorem";
+  @Input() pizzaDetail!: IGetPizzaResponse;
 
   onAddToCart() {
     this.addToCartEvent.emit(1);
   }
   get truncatedText(): string {
     const maxLength = 70;
-    if (this.fullText.length <= maxLength) {
-      return this.fullText;
+    if (this.pizzaDetail.description.length <= maxLength) {
+      return this.pizzaDetail.description;
     }
-    return this.fullText.substring(0, maxLength).trim() + '...';
+    return this.pizzaDetail.description.substring(0, maxLength).trim() + '...';
   }
 }

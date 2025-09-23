@@ -9,26 +9,8 @@
 </div>
 
 <div class="pizza-cards">
-  <div>
-    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
-  </div>
-  <div>
-    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
-  </div>
-  <div>
-    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
-  </div>
-  <div>
-    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
-  </div>
-  <div>
-    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
-  </div>
-  <div>
-    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
-  </div>
-  <div>
-    <app-order-pizza-card (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+  <div *ngFor="let pizzaDetail of pizzaDetails.getAllPizzasResponses">
+    <app-order-pizza-card [pizzaDetail]="pizzaDetail" (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
   </div>
 </div>
 
