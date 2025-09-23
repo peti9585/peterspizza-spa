@@ -33,6 +33,13 @@
   margin-top: 20px;
 }
 
+.button .mat-mdc-button-disabled {
+  background-color: #888 !important;
+  color: #ccc !important;
+  opacity: 0.8 !important;
+  pointer-events: auto;
+}
+
 @media screen and (max-width: 1200px) {
   .desc {
     flex-wrap: wrap;

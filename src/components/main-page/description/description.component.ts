@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {NgClass, NgOptimizedImage} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 export enum ComponentType {
   ItalianTaste,
@@ -15,6 +17,7 @@ export enum ComponentType {
     NgOptimizedImage,
     NgClass,
     MatButtonModule,
+    MatTooltipModule,
     RouterLink
   ],
   templateUrl: './description.component.html',
@@ -25,6 +28,7 @@ export class DescriptionComponent implements OnInit {
   @Input({ required: true }) componentType!: ComponentType;
 
   protected readonly ComponentType = ComponentType;
+  private readonly authService = inject(AuthenticationService);
 
   headingText: string = "";
   paragraphText: string = "";
@@ -58,5 +62,13 @@ export class DescriptionComponent implements OnInit {
         break;
       }
     }
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.getJwtToken() !== null;
+  }
+
+  get userFirstName(): string | null {
+    return this.isLoggedIn ? this.authService.getUserFirstName() : null;
   }
 }

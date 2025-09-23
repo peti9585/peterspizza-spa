@@ -66,12 +66,10 @@
 
   <div class="buttons">
     <div>
-      <button mat-flat-button [routerLink]="['/home']">Vissza</button>
+      <button mat-flat-button type="button" [routerLink]="['/home']">Vissza</button>
     </div>
     <div>
-      <button mat-flat-button type="submit" [disabled]="reactiveForm.invalid">
-        Regisztráció
-      </button>
+      <button mat-flat-button type="submit" [disabled]="reactiveForm.invalid">Regisztráció</button>
     </div>
   </div>
 </form>

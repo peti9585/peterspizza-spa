@@ -7,8 +7,16 @@
       <h3>{{headingText}}</h3>
       <p>{{paragraphText}}</p>
       @if (componentType === ComponentType.Takeaway) {
-        <a mat-flat-button>Étlap</a>
-        <a mat-flat-button [routerLink]="['/order']">Rendelés</a>
+        <div class="button">
+          <a mat-flat-button>Étlap</a>
+        </div>
+        <div class="button">
+          <a mat-flat-button
+             [disabled]="!isLoggedIn"
+             [matTooltip]="'Kérlek jelentkezz be.'"
+             [matTooltipDisabled]="isLoggedIn"
+             [routerLink]="['/order']">Rendelés</a>
+        </div>
       }
     </div>
   }@else {
