@@ -8,11 +8,17 @@
   @if(orderNumber > 0) { <a class="order-number">({{orderNumber}})</a> }
 </div>
 
-<div class="pizza-cards">
-  <div *ngFor="let pizzaDetail of pizzaDetails.getAllPizzasResponses">
-    <app-order-pizza-card [pizzaDetail]="pizzaDetail" (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+@if (isLoading) {
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
   </div>
-</div>
+}@else {
+  <div class="pizza-cards">
+    <div *ngFor="let pizzaDetail of pizzas.getAllPizzasResponses">
+      <app-order-pizza-card [pizzaDetail]="pizzaDetail" (addToCartEvent)="handleAddToCart($event)"></app-order-pizza-card>
+    </div>
+  </div>
+}
 
 <hr class="hr-bottom">
 
@@ -21,6 +27,6 @@
     <button mat-flat-button [routerLink]="['/home']">Vissza</button>
   </div>
   <div class="button">
-    <button mat-flat-button [routerLink]="['/cart']">Kosár</button>
+    <button mat-flat-button [disabled]="isCartEmpty" [routerLink]="['/cart']">Kosár</button>
   </div>
 </div>

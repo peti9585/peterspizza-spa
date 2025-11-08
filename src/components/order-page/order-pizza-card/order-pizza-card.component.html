@@ -5,6 +5,14 @@
   <div class="text">
     <h3>{{pizzaDetail.pizzaName}}</h3>
     <p [matTooltip]="pizzaDetail.description">{{truncatedText}}</p>
-    <button mat-flat-button (click)="onAddToCart()">Hozzáadás</button>
+    @if (count === 0) {
+      <button mat-flat-button color="primary" (click)="onAddToCart()">Hozzáadás</button>
+    } @else {
+      <div class="qty">
+        <button mat-mini-fab color="primary" (click)="decrease()">−</button>
+        <span class="qty-value">{{ count }}</span>
+        <button mat-mini-fab color="primary" (click)="increase()">+</button>
+      </div>
+    }
   </div>
 </div>

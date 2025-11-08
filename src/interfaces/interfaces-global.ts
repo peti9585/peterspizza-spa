@@ -1,3 +1,4 @@
+// Requests
 export interface IRegistrationData {
   firstName: string;
   lastName: string;
@@ -22,6 +23,17 @@ export interface ILoginResponse {
   refreshToken: string;
 }
 
+export interface IOrderPizzaRequest {
+  pizzaId: number;
+  quantity: number;
+}
+
+export interface IOrderPizzasRequest {
+  userId: number;
+  orderPizzaRequests: IOrderPizzaRequest[]
+}
+
+// Responses
 export interface ITokenResponse {
   jwtToken: string;
   refreshToken: string;
@@ -32,7 +44,18 @@ export interface IGetAllPizzasResponse {
 }
 
 export interface IGetPizzaResponse {
+  pizzaId: number;
   pizzaName: string;
   description: string;
   pizzaImageBytes: string;
+}
+
+export interface IGetPizzasByIdsResponse {
+  getPizzaResponses: IGetPizzaByIdResponse[];
+}
+
+export interface IGetPizzaByIdResponse {
+  pizzaId: number,
+  pizzaName: string,
+  pizzaPrice: number
 }
