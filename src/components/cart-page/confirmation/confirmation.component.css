@@ -15,3 +15,14 @@
   align-items: center;
   gap: 10px;
 }
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: red;
+}
+
+.spinner-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

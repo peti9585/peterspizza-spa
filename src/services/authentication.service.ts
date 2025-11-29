@@ -38,7 +38,6 @@ export class AuthenticationService {
     return this.http.post<ITokenResponse>(this.baseUrl + '/refresh-token', request)
       .pipe(
         tap(resp => {
-          console.log(resp);
           if (resp.jwtToken.length > 0 && resp.refreshToken.length > 0) {
             localStorage.setItem('jwtToken', resp.jwtToken);
             localStorage.setItem('refreshToken', resp.refreshToken);

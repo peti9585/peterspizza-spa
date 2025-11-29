@@ -1,7 +1,12 @@
 import {inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {IGetAllPizzasResponse, IGetPizzasByIdsResponse, IOrderPizzasRequest} from '../interfaces/interfaces-global';
+import {
+  IGetAllOrdersResponse,
+  IGetAllPizzasResponse,
+  IGetPizzasByIdsResponse,
+  IOrderPizzasRequest
+} from '../interfaces/interfaces-global';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +25,9 @@ export class PizzaService {
 
   sendOrder(request: IOrderPizzasRequest) {
     return this.http.post(this.baseUrl + '/order', request);
+  }
+
+  getAllOrdersById(): Observable<IGetAllOrdersResponse> {
+    return this.http.get<IGetAllOrdersResponse>(this.baseUrl + '/orders-all/');
   }
 }

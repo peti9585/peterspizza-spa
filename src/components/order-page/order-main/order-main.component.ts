@@ -24,7 +24,6 @@ import {CartService} from '../../../services/cart.service';
   styleUrl: './order-main.component.css'
 })
 export class OrderMainComponent implements OnInit {
-  orderNumber: number = 0;
   pizzas!: IGetAllPizzasResponse;
   isLoading: boolean = true;
   isCartEmpty: boolean = true;
@@ -51,6 +50,10 @@ export class OrderMainComponent implements OnInit {
     }
   }
 
+  handleCountChanged(): void {
+    this.checkIfCartIsEmpty();
+  }
+
   handleAddToCart(pizzaId: number) {
     const cardCounts = this.cartService.getCounts();
     if (!cardCounts[pizzaId]) {
@@ -65,8 +68,10 @@ export class OrderMainComponent implements OnInit {
 
   private checkIfCartIsEmpty(): void {
     const cardCounts = this.cartService.getCounts();
-    if (cardCounts && Object.keys(cardCounts).length > 0) {
+    if (cardCounts && Object.values(cardCounts).some(count => count > 0)) {
       this.isCartEmpty = false;
+    }else {
+      this.isCartEmpty = true;
     }
   }
 }

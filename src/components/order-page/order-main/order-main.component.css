@@ -72,6 +72,7 @@
 }
 
 .material-symbols-outlined, .order-number {
+  color: var(--text-dark-red);
   transform: scale(2.0);
 }
 

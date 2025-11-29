@@ -18,6 +18,7 @@ export interface IRefreshJwtTokenRequest {
 }
 
 export interface ILoginResponse {
+  id: number;
   name: string;
   jwtToken: string;
   refreshToken: string;
@@ -29,7 +30,6 @@ export interface IOrderPizzaRequest {
 }
 
 export interface IOrderPizzasRequest {
-  userId: number;
   orderPizzaRequests: IOrderPizzaRequest[]
 }
 
@@ -58,4 +58,33 @@ export interface IGetPizzaByIdResponse {
   pizzaId: number,
   pizzaName: string,
   pizzaPrice: number
+}
+
+export interface IGetUserDetailsByIdResponse {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+}
+
+export interface IUpdateUserRequest {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+}
+
+export interface IGetAllOrderResponse {
+  orderId: string;
+  orderState: number;
+  orderDate: string;
+}
+
+export interface IGetAllOrdersResponse {
+  getAllOrderResponses: IGetAllOrderResponse[];
+}
+
+export interface IOrderStatusChanged {
+  orderId: string;
+  newOrderState: number;
 }

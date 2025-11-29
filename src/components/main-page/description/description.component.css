@@ -4,7 +4,7 @@
 }
 
 .desc-item img {
-  width: calc(50vw - 108px);
+  width: calc(50vw - 100px);
   object-fit: cover;
   height: 700px;
 }

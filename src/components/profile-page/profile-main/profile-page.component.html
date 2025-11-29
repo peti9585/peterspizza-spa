@@ -1,0 +1,36 @@
+<div class="header">
+  <div class="header-center">
+    <h1>FIÓK</h1>
+    <hr class="hr-top">
+  </div>
+
+  <div class="header-toolbar">
+    <mat-toolbar>
+      <button class="toolbar-button" [routerLink]="['/home']">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button class="toolbar-button" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+</div>
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer #drawer class="drawer-side" mode="side" opened>
+    <div class="profile-buttons">
+      <button mat-flat-button (click)="drawer.toggle(); switchMode(DrawerMode.ProfileData)">Felhasználói adatok</button>
+      <button mat-flat-button (click)="drawer.toggle(); switchMode(DrawerMode.Orders)">Rendelések</button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    @switch (currentMode) {
+      @case (DrawerMode.ProfileData) {
+        <app-profile-data></app-profile-data>
+      }
+      @case (DrawerMode.Orders) {
+        <app-profile-orders></app-profile-orders>
+      }
+    }
+  </mat-drawer-content>
+</mat-drawer-container>

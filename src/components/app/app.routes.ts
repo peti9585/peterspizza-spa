@@ -6,6 +6,8 @@ import {CartMainComponent} from '../cart-page/cart-main/cart-main.component';
 import {RegistrationComponent} from '../registration-page/registration/registration.component';
 import {LoginComponent} from '../login-page/login/login.component';
 import {authGuard} from '../../guards/auth.guard';
+import {ProfilePageComponent} from '../profile-page/profile-main/profile-page.component';
+import {AdminLoginComponent} from '../admin-page/admin-login/admin-login.component';
 
 export const routes: Routes = [
   { path: 'home', component: MainComponent },
@@ -14,6 +16,8 @@ export const routes: Routes = [
   { path: '404', component: NotfoundComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfilePageComponent, canActivate: [authGuard] },
+  { path: 'admin/login', component: AdminLoginComponent },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/404' }

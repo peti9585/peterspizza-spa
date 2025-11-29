@@ -8,6 +8,9 @@ import {CartService} from '../../../services/cart.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {MatDialogRef} from '@angular/material/dialog';
+import {UserService} from '../../../services/user.service';
+import {NgIf} from '@angular/common';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-confirmation',
@@ -18,28 +21,40 @@ import {MatDialogRef} from '@angular/material/dialog';
     MatLabel,
     ReactiveFormsModule,
     MatFormField,
-    FormsModule
+    FormsModule,
+    NgIf,
+    MatProgressSpinner,
   ],
   templateUrl: './confirmation.component.html',
   styleUrl: './confirmation.component.css'
 })
 export class ConfirmationComponent {
-  formGroup: FormGroup;
+  formGroup: FormGroup | undefined;
+  isLoading: boolean = true;
 
   private readonly formBuilder = inject(FormBuilder);
   private readonly pizzaService = inject(PizzaService);
+  private readonly userService = inject(UserService);
   private readonly cartService = inject(CartService);
   private readonly toasterService = inject(ToastrService);
   private readonly router = inject(Router);
   private readonly dialogRef = inject(MatDialogRef<ConfirmationComponent>);
 
   constructor() {
-    this.formGroup = this.formBuilder.group({
-      fullName: [{ value: 'Kis Péter', disabled: true }],
-      phoneNumber: [{ value: '0917201493', disabled: true }],
-      email: [{ value: 'peti9585@gmail.com', disabled: true }]
+    this.userService.getUserDetailsById().subscribe({
+      next: (response) => {
+        this.formGroup = this.formBuilder.group({
+            fullName: [{ value: response.firstName + ' ' + response.lastName, disabled: true }],
+            phoneNumber: [{ value: response.phoneNumber, disabled: true }],
+            email: [{ value: response.email, disabled: true }]
+          }
+        );
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.toasterService.error('Hiba történt a kérés során.', 'Hiba');
       }
-    );
+    });
   }
 
   sendOrder() {
@@ -49,7 +64,11 @@ export class ConfirmationComponent {
         this.cartService.removeAllFromCart();
         this.router.navigate(['/home']);
         this.dialogRef.close();
-        this.toasterService.success('A rendelés sikeres volt! A rendelés állapotát a fiók menüpontban követheti nyomon.');
+        this.toasterService.success('A rendelés sikeres volt! A rendelés állapotát a fiók menüpontban követheted nyomon.');
+      },
+      error: (error) => {
+        this.toasterService.error("Hiba történt a rendelés leadása során.", "Hiba");
+        this.dialogRef.close();
       }
     });
   }
@@ -63,9 +82,6 @@ export class ConfirmationComponent {
         quantity
       }));
 
-    return {
-      userId: 1,
-      orderPizzaRequests
-    }
+    return { orderPizzaRequests }
   }
 }

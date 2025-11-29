@@ -104,7 +104,12 @@
 }
 
 .logout.mat-mdc-unelevated-button {
-  background-color: red !important;
+  background-color: #A31D1D !important;
+  width: fit-content;
+  height: 25px;
+}
+
+.profile.mat-mdc-unelevated-button {
   width: fit-content;
   height: 25px;
 }

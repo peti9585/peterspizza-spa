@@ -1,33 +1,40 @@
 <div class="modal">
   <h2>Személyes adatok</h2>
-  <form class="login-form" [formGroup]="formGroup" (ngSubmit)="sendOrder()">
-    <div>
-      <mat-form-field>
-        <mat-label>Név</mat-label>
-        <input matInput id="fullName" [disabled]="true" type="text" formControlName="fullName">
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field>
-        <mat-label>Telefonszám</mat-label>
-        <input matInput id="phoneNumber" [disabled]="true" type="text" formControlName="phoneNumber">
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field>
-        <mat-label>E-mail</mat-label>
-        <input matInput id="email" [disabled]="true" type="text" formControlName="email">
-      </mat-form-field>
-    </div>
-
-    <div class="buttons">
+  @if (!isLoading) {
+    <form *ngIf="formGroup" class="login-form" [formGroup]="formGroup" (ngSubmit)="sendOrder()">
       <div>
-        <button mat-flat-button type="submit">Rendelés</button>
+        <mat-form-field>
+          <mat-label>Név</mat-label>
+          <input matInput id="fullName" [disabled]="true" type="text" formControlName="fullName">
+        </mat-form-field>
       </div>
-    </div>
-  </form>
 
-  <p>Ha a fenti adatok közül valamelyik helytelen, kérem javítsa a profil beállításai között. <a href="/home"><strong>Ugrás a profil beállításaihoz.</strong></a></p>
+      <div>
+        <mat-form-field>
+          <mat-label>Telefonszám</mat-label>
+          <input matInput id="phoneNumber" [disabled]="true" type="text" formControlName="phoneNumber">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>E-mail</mat-label>
+          <input matInput id="email" [disabled]="true" type="text" formControlName="email">
+        </mat-form-field>
+      </div>
+
+      <div class="buttons">
+        <div>
+          <button mat-flat-button type="submit">Rendelés</button>
+        </div>
+      </div>
+    </form>
+  }
+  @else {
+    <div class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+  <p>Ha a fenti adatok közül valamelyik helytelen, kérem javítsa a profil beállításai között. <a href="/profile"><strong>Ugrás a profil beállításaihoz.</strong></a></p>
 </div>
