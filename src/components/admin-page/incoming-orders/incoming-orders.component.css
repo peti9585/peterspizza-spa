@@ -1,0 +1,75 @@
+.incoming-orders-table {
+  width: 100%;
+}
+
+.data-row {
+  cursor: pointer;
+}
+
+.data-row--expanded {
+  background: rgba(0, 0, 0, 0.09);
+}
+
+.detail-row td {
+  padding: 0;
+  border-bottom: none;
+}
+
+.detail-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 180ms ease;
+  padding: 0 16px;
+}
+
+.detail-wrapper--open {
+  max-height: 400px;
+  padding: 12px 16px 16px;
+}
+
+.detail-header {
+  margin-bottom: 8px;
+}
+
+.detail-items {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.detail-items th,
+.detail-items td {
+  padding: 6px 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.detail-items th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.left {
+  text-align: left;
+}
+
+.order-state-column {
+  text-align: center;
+}
+
+.order-state-row {
+  text-align: center;
+}
+
+.btn-accept {
+  background-color: #4caf50 !important; /* Zöld */
+  color: white !important;
+}
+
+.btn-ready {
+  background-color: #ff9800 !important; /* Narancs */
+  color: white !important;
+}
+
+.btn-close {
+  background-color: #f44336 !important; /* Piros */
+  color: white !important;
+}
