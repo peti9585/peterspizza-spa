@@ -27,8 +27,8 @@ export class SignalrService {
   }
 
   public addMessageListener = () => {
-    this.hubConnection.on('ReceiveOrderStatus', (orderId: string, orderState: number) => {
-      this.orderStatusChangedSubject.next({orderId: orderId, newOrderState: orderState} as IOrderStatusChanged);
+    this.hubConnection.on('ReceiveOrderStatus', (statusChanged: IOrderStatusChanged) => {
+      this.orderStatusChangedSubject.next(statusChanged);
     });
   }
 

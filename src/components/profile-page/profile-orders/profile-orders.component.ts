@@ -12,8 +12,6 @@ import {PizzaService} from '../../../services/pizza.service';
 import {ToastrService} from 'ngx-toastr';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {SignalrService} from '../../../services/signalr.service';
-import {takeUntil} from 'rxjs';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile-orders',
@@ -62,6 +60,7 @@ export class ProfileOrdersComponent implements OnInit{
 
         this.signalRService.orderStatusChanged$
           .subscribe((u) => {
+            console.log(u);
             const index = this.dataSource
               .findIndex(o => o.orderId === u.orderId.toLowerCase());
             this.dataSource[index] = {
@@ -90,6 +89,8 @@ export class ProfileOrdersComponent implements OnInit{
         return 'Készítés alatt'
       case 3:
         return 'Készen áll az átvételre'
+      case 4:
+        return 'Átvett'
     }
 
     return '';

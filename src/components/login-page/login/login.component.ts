@@ -1,9 +1,9 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {Router, RouterLink} from '@angular/router';
-import {ILoginData} from '../../../interfaces/interfaces-global';
+import {ILoginData, LoginType} from '../../../interfaces/interfaces-global';
 import {ToastrService} from 'ngx-toastr';
 import {AuthenticationService} from '../../../services/authentication.service';
 
@@ -23,6 +23,8 @@ import {AuthenticationService} from '../../../services/authentication.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  @Input() loginType: LoginType = LoginType.User;
+
   reactiveForm: FormGroup;
 
   private readonly formBuilder = inject(FormBuilder);
@@ -37,24 +39,26 @@ export class LoginComponent {
     });
   }
 
+  onLogin() {
+    this.onSubmit()
+  }
+
   private onSubmit() {
     if (this.reactiveForm.valid) {
       const loginData: ILoginData = this.reactiveForm.value;
 
-      this.authService.submitLogin(loginData).subscribe({
-        next: (response) => {
+      this.authService.submitLogin(loginData, this.loginType).subscribe({
+        next: (_) => {
           this.toasterService.success('Sikeresen bejelentkeztél az oldalra!', 'Sikeres bejelentkezés');
 
-          this.router.navigate(['/home']);
+          this.loginType === LoginType.User
+            ? this.router.navigate(['/home'])
+            : this.router.navigate(['/admin/dashboard']);
         },
-        error: (error) => {
+        error: (_) => {
             this.toasterService.error('Hiba történt a bejelentkezés során!', 'Hiba');
         }
       });
     }
-  }
-
-  onLogin() {
-    this.onSubmit();
   }
 }

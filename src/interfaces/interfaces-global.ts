@@ -88,3 +88,50 @@ export interface IOrderStatusChanged {
   orderId: string;
   newOrderState: number;
 }
+
+export interface IJwtTokenInformationRequest {
+  jwtToken: string;
+}
+
+export interface IJwtTokenInformationResponse {
+  isAdmin: boolean;
+}
+
+export namespace Admin {
+  export interface IOrderItem {
+    orderId: number;
+    pizzaName: string;
+    quantity: number;
+    price: number;
+  }
+
+  export interface IGetAllOrderResponse {
+    orderId: string;
+    userName: string;
+    orderState: OrderState;
+    orderDate: string;
+    orderItems: IOrderItem[];
+  }
+  export interface IGetAllOrdersResponse {
+    getAllOrderResponses: IGetAllOrderResponse[];
+  }
+
+  export interface IChangeOrderStateRequest {
+    orderId: string;
+    newOrderState: OrderState;
+  }
+}
+
+// Enums
+export enum LoginType {
+  User,
+  Admin
+}
+
+export enum OrderState {
+  Undefined,
+  WaitingToAccept,
+  Preparing,
+  ReadyToPickUp,
+  Done
+}

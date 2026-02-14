@@ -1,5 +1,14 @@
 import {inject, Injectable} from '@angular/core';
-import {ILoginData, ILoginResponse, IRefreshJwtTokenRequest, IRegistrationData, ITokenResponse} from '../interfaces/interfaces-global';
+import {
+  IJwtTokenInformationRequest,
+  IJwtTokenInformationResponse,
+  ILoginData,
+  ILoginResponse,
+  IRefreshJwtTokenRequest,
+  IRegistrationData,
+  ITokenResponse,
+  LoginType
+} from '../interfaces/interfaces-global';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import {Router} from '@angular/router';
@@ -9,22 +18,31 @@ import {ToastrService} from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private readonly baseUrl = 'http://localhost:5104/api/user';
+  private readonly baseUrlForUser = 'http://localhost:5104/api/user';
+  private readonly baseUrlForAdmin = 'http://localhost:5104/api/admin';
 
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly toasterService = inject(ToastrService);
 
   submitRegistration(registrationData: IRegistrationData) {
-    return this.http.post(this.baseUrl + '/register', registrationData);
+    return this.http.post(this.baseUrlForUser + '/register', registrationData);
   }
 
-  submitLogin(loginData: ILoginData): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>(this.baseUrl + '/login', loginData)
+  submitLogin(loginData: ILoginData, loginType: LoginType): Observable<ILoginResponse> {
+    const baseUrl = loginType === LoginType.User
+      ? this.baseUrlForUser
+      : this.baseUrlForAdmin;
+
+    return this.http.post<ILoginResponse>(baseUrl + '/login', loginData)
       .pipe(tap(resp => {
         if (resp.name.length > 0 && resp.jwtToken.length > 0) {
           localStorage.setItem('jwtToken', resp.jwtToken);
-          localStorage.setItem('refreshToken', resp.refreshToken);
+
+          if (loginType === LoginType.User) {
+            localStorage.setItem('refreshToken', resp.refreshToken);
+          }
+
           localStorage.setItem('userFirstName', resp.name);
         }
       }));
@@ -35,7 +53,7 @@ export class AuthenticationService {
       refreshToken: this.getRefreshToken()
     } as IRefreshJwtTokenRequest;
 
-    return this.http.post<ITokenResponse>(this.baseUrl + '/refresh-token', request)
+    return this.http.post<ITokenResponse>(this.baseUrlForUser + '/refresh-token', request)
       .pipe(
         tap(resp => {
           if (resp.jwtToken.length > 0 && resp.refreshToken.length > 0) {
@@ -52,6 +70,20 @@ export class AuthenticationService {
 
   get isLoggedIn(): boolean {
     return this.getJwtToken() !== null;
+  }
+
+  get isAdmin(): Observable<IJwtTokenInformationResponse> {
+    const jwtToken = this.getJwtToken();
+    const request: IJwtTokenInformationRequest = {
+      jwtToken: jwtToken ?? ''
+    };
+
+    return this.http.post<IJwtTokenInformationResponse>(this.baseUrlForAdmin + '/permission', request)
+      .pipe(
+        tap(resp => {
+          return resp;
+        })
+      );
   }
 
   getJwtToken(): string | null {
