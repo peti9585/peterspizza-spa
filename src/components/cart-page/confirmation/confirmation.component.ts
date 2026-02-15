@@ -20,7 +20,6 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatInput,
     MatLabel,
     ReactiveFormsModule,
-    MatFormField,
     FormsModule,
     NgIf,
     MatProgressSpinner,
@@ -51,7 +50,7 @@ export class ConfirmationComponent {
         );
         this.isLoading = false;
       },
-      error: (error) => {
+      error: (_) => {
         this.toasterService.error('Hiba történt a kérés során.', 'Hiba');
       }
     });
@@ -66,7 +65,7 @@ export class ConfirmationComponent {
         this.dialogRef.close();
         this.toasterService.success('A rendelés sikeres volt! A rendelés állapotát a fiók menüpontban követheted nyomon.');
       },
-      error: (error) => {
+      error: (_) => {
         this.toasterService.error("Hiba történt a rendelés leadása során.", "Hiba");
         this.dialogRef.close();
       }

@@ -7,12 +7,13 @@ import {
   IGetPizzasByIdsResponse,
   IOrderPizzasRequest
 } from '../interfaces/interfaces-global';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PizzaService {
-  private readonly baseUrl = 'http://localhost:5104/api/pizza';
+  private readonly baseUrl = environment.apiBaseUrl + '/api/pizza';
 
   private readonly http = inject(HttpClient);
   getAllPizzaDetails(): Observable<IGetAllPizzasResponse> {

@@ -4,12 +4,13 @@ import {Observable} from 'rxjs';
 import {Admin} from '../interfaces/interfaces-global';
 import IGetAllOrdersResponse = Admin.IGetAllOrdersResponse;
 import IChangeOrderStateRequest = Admin.IChangeOrderStateRequest;
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  private readonly baseUrl = 'http://localhost:5104/api/admin';
+  private readonly baseUrl = environment.apiBaseUrl + '/api/admin';
 
   private readonly http = inject(HttpClient);
 

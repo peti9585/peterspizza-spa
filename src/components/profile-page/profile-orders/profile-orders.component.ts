@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -12,6 +12,7 @@ import {PizzaService} from '../../../services/pizza.service';
 import {ToastrService} from 'ngx-toastr';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {SignalrService} from '../../../services/signalr.service';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile-orders',
@@ -39,6 +40,7 @@ export class ProfileOrdersComponent implements OnInit{
   private readonly pizzaService = inject(PizzaService);
   private readonly toasterService = inject(ToastrService);
   private readonly signalRService = inject(SignalrService);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.pizzaService.getAllOrdersById().subscribe({
@@ -59,10 +61,13 @@ export class ProfileOrdersComponent implements OnInit{
         this.signalRService.handleDisconnects();
 
         this.signalRService.orderStatusChanged$
+          .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe((u) => {
-            console.log(u);
             const index = this.dataSource
               .findIndex(o => o.orderId === u.orderId.toLowerCase());
+
+            if (index === -1) return;
+
             this.dataSource[index] = {
               ...this.dataSource[index],
               orderState: this.mapOrderState(u.newOrderState),

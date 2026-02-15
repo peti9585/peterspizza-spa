@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -16,6 +16,7 @@ import IOrderItem = Admin.IOrderItem;
 import {ToastrService} from 'ngx-toastr';
 import IChangeOrderStateRequest = Admin.IChangeOrderStateRequest;
 import {SignalrAdminService} from '../../../services/signalr-admin.service';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-incoming-orders',
@@ -42,10 +43,11 @@ export class IncomingOrdersComponent implements OnInit{
   private readonly adminService = inject(AdminService);
   private readonly toasterService = inject(ToastrService);
   private readonly signalRAdminService = inject(SignalrAdminService);
+  private readonly destroyRef = inject(DestroyRef);
 
   protected readonly OrderState = OrderState;
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.adminService.getAllOrders().subscribe({
       next: (response) => {
         this.dataSource = response.getAllOrderResponses.map(o => ({
@@ -64,11 +66,12 @@ export class IncomingOrdersComponent implements OnInit{
       }
     });
 
-    this.signalRAdminService.startConnection();
+    await this.signalRAdminService.startConnection();
     this.signalRAdminService.addMessageListener();
     this.signalRAdminService.handleDisconnects();
 
     this.signalRAdminService.adminOrdersChanged$
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(u => {
         this.dataSource = u.getAllOrderResponses.map(o => ({
           ...o,

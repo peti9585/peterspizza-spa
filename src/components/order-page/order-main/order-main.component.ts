@@ -68,10 +68,6 @@ export class OrderMainComponent implements OnInit {
 
   private checkIfCartIsEmpty(): void {
     const cardCounts = this.cartService.getCounts();
-    if (cardCounts && Object.values(cardCounts).some(count => count > 0)) {
-      this.isCartEmpty = false;
-    }else {
-      this.isCartEmpty = true;
-    }
+    this.isCartEmpty = !(cardCounts && Object.values(cardCounts).some(count => count > 0));
   }
 }

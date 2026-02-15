@@ -2,12 +2,13 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IGetUserDetailsByIdResponse, IUpdateUserRequest} from '../interfaces/interfaces-global';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private readonly baseUrl = 'http://localhost:5104/api/user';
+  private readonly baseUrl = environment.apiBaseUrl + '/api/user';
 
   private readonly http = inject(HttpClient);
 

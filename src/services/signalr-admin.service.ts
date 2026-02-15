@@ -4,6 +4,7 @@ import {AuthenticationService} from './authentication.service';
 import {Subject} from 'rxjs';
 import {Admin} from '../interfaces/interfaces-global';
 import IGetAllOrdersResponse = Admin.IGetAllOrdersResponse;
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,24 +17,32 @@ export class SignalrAdminService {
 
   public adminOrdersChanged$ = this.adminOrdersChangedSubject.asObservable();
 
-  public startConnection = () => {
-    this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://localhost:5104/adminHub', { accessTokenFactory: () => this.authService.getJwtToken() ?? ''})
-      .build();
+  public startConnection = async() => {
+    if (!this.hubConnection) {
+      this.hubConnection = new HubConnectionBuilder()
+        .withUrl(environment.apiBaseUrl + '/adminHub', { accessTokenFactory: () => this.authService.getJwtToken() ?? ''})
+        .build();
+    }
+    this.handleDisconnects();
 
-    this.hubConnection
-      .start()
-      .then(() => console.log('SignalR Connection started'))
-      .catch(err => console.log('Error establishing SignalR connection: ' + err));
+    try {
+      await this.hubConnection.start()
+    } catch (err) {
+      console.log('Error while establishing connection.');
+    }
   }
 
   public addMessageListener = () => {
+    if (!this.hubConnection) return;
+
     this.hubConnection.on('ReceiveOrderFromUser', (statusChanged: any) => {
       this.adminOrdersChangedSubject.next(statusChanged);
     });
   }
 
   public handleDisconnects = () => {
+    if (!this.hubConnection) return;
+    
     this.hubConnection.onclose(() => {
       setTimeout(() => this.startConnection(), 3000);
     });

@@ -15,7 +15,6 @@ import {IUpdateUserRequest} from '../../../interfaces/interfaces-global';
     MatInput,
     MatLabel,
     ReactiveFormsModule,
-    MatFormField,
     MatProgressSpinner
   ],
   templateUrl: './profile-data.component.html',
@@ -48,7 +47,7 @@ export class ProfileDataComponent {
         this.formGroup.enable();
         this.isLoading = false;
       },
-      error: (error) => {
+      error: (_) => {
         this.toasterService.error('Hiba történt a kérés során.', 'Hiba');
         this.isLoading = false;
       }
@@ -70,6 +69,6 @@ export class ProfileDataComponent {
       error: (error) => {
         this.toasterService.error(`Hiba történt a kérés során: ${error.error.detail}`, 'Hiba');
       }
-    });;
+    });
   }
 }

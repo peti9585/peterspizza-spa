@@ -3,6 +3,7 @@ import {HubConnection, HubConnectionBuilder} from '@microsoft/signalr';
 import {AuthenticationService} from './authentication.service';
 import {IOrderStatusChanged} from '../interfaces/interfaces-global';
 import {Subject} from 'rxjs';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +16,32 @@ export class SignalrService {
 
   public orderStatusChanged$ = this.orderStatusChangedSubject.asObservable();
 
-  public startConnection = () => {
-    this.hubConnection = new HubConnectionBuilder()
-      .withUrl('http://localhost:5104/ordersHub', { accessTokenFactory: () => this.authService.getJwtToken() ?? ''})
-      .build();
+  public startConnection = async() => {
+    if (!this.hubConnection) {
+      this.hubConnection = new HubConnectionBuilder()
+        .withUrl(environment.apiBaseUrl + '/ordersHub', { accessTokenFactory: () => this.authService.getJwtToken() ?? ''})
+        .build();
+    }
+    this.handleDisconnects();
 
-    this.hubConnection
-      .start()
-      .then(() => console.log('SignalR Connection started'))
-      .catch(err => console.log('Error establishing SignalR connection: ' + err));
+    try {
+      await this.hubConnection.start();
+    } catch (err) {
+      console.log('Error while establishing connection.');
+    }
   }
 
   public addMessageListener = () => {
+    if (!this.hubConnection) return;
+
     this.hubConnection.on('ReceiveOrderStatus', (statusChanged: IOrderStatusChanged) => {
       this.orderStatusChangedSubject.next(statusChanged);
     });
   }
 
   public handleDisconnects = () => {
+    if (!this.hubConnection) return;
+
     this.hubConnection.onclose(() => {
       setTimeout(() => this.startConnection(), 3000);
     });

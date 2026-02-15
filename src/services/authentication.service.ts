@@ -13,13 +13,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private readonly baseUrlForUser = 'http://localhost:5104/api/user';
-  private readonly baseUrlForAdmin = 'http://localhost:5104/api/admin';
+  private readonly baseUrlForUser = environment.apiBaseUrl + '/api/user';
+  private readonly baseUrlForAdmin = environment.apiBaseUrl + '/api/admin';
 
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
