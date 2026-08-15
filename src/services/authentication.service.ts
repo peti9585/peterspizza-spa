@@ -79,12 +79,7 @@ export class AuthenticationService {
       jwtToken: jwtToken ?? ''
     };
 
-    return this.http.post<IJwtTokenInformationResponse>(this.baseUrlForAdmin + '/permission', request)
-      .pipe(
-        tap(resp => {
-          return resp;
-        })
-      );
+    return this.http.post<IJwtTokenInformationResponse>(this.baseUrlForAdmin + '/permission', request);
   }
 
   getJwtToken(): string | null {
