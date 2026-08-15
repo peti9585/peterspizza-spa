@@ -1,0 +1,11 @@
+<button (click)="onSwitchToIncomingOrders()" [disabled]="true">Beérkező rendelések</button>
+<hr>
+
+@switch (currentTab) {
+  @case (DashboardTab.Undefined) {
+    <p>Something went wrong...</p>
+  }
+  @case (DashboardTab.CurrentOrders) {
+    <app-incoming-orders></app-incoming-orders>
+  }
+}

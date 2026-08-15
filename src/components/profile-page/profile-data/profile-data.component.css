@@ -1,0 +1,34 @@
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: red;
+}
+
+.spinner-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--primary-button) !important;
+  -webkit-text-fill-color: white !important;
+  border-radius: 10px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px var(--primary-button) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+::ng-deep.mdc-floating-label {
+  color: white !important;
+}

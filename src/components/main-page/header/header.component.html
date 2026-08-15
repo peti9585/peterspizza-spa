@@ -2,7 +2,8 @@
   <div class="header-top">
     <div class="login-container">
       @if (isLoggedIn) {
-        <p class="firstname">Üdv, <b>{{userFirstName}}</b></p>
+        <p class="firstname">Üdv, <b>{{userFirstName}}</b>!</p>
+        <a class="profile" mat-flat-button [routerLink]="['/profile']">Profil</a>
         <a class="logout" mat-flat-button (click)="logout()" >Kijelentkezés</a>
       } @else {
         <a class="login" mat-flat-button [routerLink]="['/register']">Regisztráció</a>

@@ -3,6 +3,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {Router, RouterLink} from '@angular/router';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 })
 export class HeaderComponent {
   private readonly authService = inject(AuthenticationService);
+  private readonly toasterService = inject(ToastrService);
   private readonly router = inject(Router);
 
   get isLoggedIn(): boolean {
@@ -24,6 +26,7 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout();
+    this.toasterService.info('Sikeresen kijelentkeztél az oldalról.', 'Sikeres kijelentkezés');
     this.router.navigate(['/home']);
   }
 

@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+  background-color: var(--primary-button);
+}
+
+tr.mat-mdc-row:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mat-mdc-cell {
+  border-bottom: 0;
+}
+
+.mat-mdc-header-cell {
+  border-bottom: 1px solid white;
+}
+
+.mat-mdc-header-cell,
+.mat-mdc-cell {
+  color: white;
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: red;
+}
+
+.spinner-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

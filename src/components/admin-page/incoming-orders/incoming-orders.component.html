@@ -1,0 +1,93 @@
+<table
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8 incoming-orders-table"
+  multiTemplateDataRows>
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{ element.position }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderId">
+    <th mat-header-cell *matHeaderCellDef> Rendelés azonosító </th>
+    <td mat-cell *matCellDef="let element"> {{ element.orderId }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Megrendelő </th>
+    <td mat-cell *matCellDef="let element"> {{ element.userName }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderState">
+    <th mat-header-cell *matHeaderCellDef class="order-state-column"> Állapot </th>
+    <td mat-cell *matCellDef="let element" class="order-state-row">
+      @switch (element.orderState) {
+        @case (OrderState.WaitingToAccept) {
+          <button mat-flat-button class="btn-accept" (click)="changeOrderState(element.orderState + 1, element.orderId); $event.stopPropagation()">Elfogadás</button>
+        }
+        @case (OrderState.Preparing) {
+          <button mat-flat-button class="btn-ready" (click)="changeOrderState(element.orderState + 1, element.orderId); $event.stopPropagation()">Kész</button>
+        }
+        @case (OrderState.ReadyToPickUp) {
+          <button mat-flat-button class="btn-close" (click)="changeOrderState(element.orderState + 1, element.orderId); $event.stopPropagation()">Rendelés lezárása</button>
+        }
+      }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderDate">
+    <th mat-header-cell *matHeaderCellDef> Rendelés dátuma </th>
+    <td mat-cell *matCellDef="let element"> {{ element.orderDate }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+      <div class="detail-wrapper" [class.detail-wrapper--open]="isExpanded(element)">
+        <div class="detail-header">
+          <strong>Részletek</strong>
+        </div>
+
+        <table class="detail-items">
+          <thead>
+            <tr>
+              <th>Termék</th>
+              <th class="left">Mennyiség</th>
+              <th class="left">Ár</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (it of element.orderItems; track it.orderId) {
+              <tr>
+                <td>{{ it.pizzaName }}</td>
+                <td class="left">{{ it.quantity }}</td>
+                <td class="left">{{ it.price }} €</td>
+              </tr>
+            }
+          <tr>
+            <td></td>
+            <td></td>
+            <td class="left"><strong>Összesen:</strong> {{calculateSumOfOrderItems(element.orderItems)}}€</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    class="data-row"
+    [class.data-row--expanded]="isExpanded(row)"
+    (click)="toggleRow(row)"
+  ></tr>
+
+  <tr
+    mat-row
+    *matRowDef="let _; columns: ['expandedDetail']"
+    class="detail-row"
+  ></tr>
+</table>

@@ -1,4 +1,4 @@
-import {Component, inject, Input, output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output, output} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltip} from '@angular/material/tooltip';
 import {IGetPizzaResponse} from '../../../interfaces/interfaces-global';
@@ -16,6 +16,7 @@ import {CartService} from '../../../services/cart.service';
 export class OrderPizzaCardComponent {
   addToCartEvent = output<number>();
   @Input() pizzaDetail!: IGetPizzaResponse;
+  @Output() countChanged = new EventEmitter();
 
   private readonly cartService = inject(CartService);
 
@@ -26,11 +27,13 @@ export class OrderPizzaCardComponent {
 
   increase(): void {
     this.cartService.increaseCount(this.pizzaDetail.pizzaId);
+    this.countChanged.emit();
   }
 
   decrease(): void {
     if (this.count >= 1){
       this.cartService.decreaseCount(this.pizzaDetail.pizzaId);
+      this.countChanged.emit();
     }
   }
 
