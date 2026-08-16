@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {MatDialogRef} from '@angular/material/dialog';
 import {UserService} from '../../../services/user.service';
-import {NgIf} from '@angular/common';
+
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
@@ -21,9 +21,8 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatLabel,
     ReactiveFormsModule,
     FormsModule,
-    NgIf,
-    MatProgressSpinner,
-  ],
+    MatProgressSpinner
+],
   templateUrl: './confirmation.component.html',
   styleUrl: './confirmation.component.css'
 })

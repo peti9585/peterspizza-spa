@@ -2,8 +2,8 @@ import {MatTable, MatHeaderCell, MatCell, MatHeaderRow, MatRow, MatColumnDef, Ma
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
 import {Router, RouterLink} from '@angular/router';
-import {Component, OnInit, OnDestroy, Inject, inject} from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import {Component, OnInit, OnDestroy, Inject, inject, DOCUMENT} from '@angular/core';
+
 import {DomSanitizer} from '@angular/platform-browser';
 import {PizzaService} from '../../../services/pizza.service';
 import {CartService} from '../../../services/cart.service';

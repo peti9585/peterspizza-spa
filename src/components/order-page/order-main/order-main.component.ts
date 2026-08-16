@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {InfoModalComponent} from '../info-modal/info-modal.component';
 import {CookieService} from 'ngx-cookie-service';
 import {PizzaService} from '../../../services/pizza.service';
-import {NgForOf} from '@angular/common';
+
 import {IGetAllPizzasResponse} from '../../../interfaces/interfaces-global';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {CartService} from '../../../services/cart.service';
@@ -17,9 +17,8 @@ import {CartService} from '../../../services/cart.service';
     OrderPizzaCardComponent,
     MatButtonModule,
     RouterLink,
-    NgForOf,
-    MatProgressSpinner,
-  ],
+    MatProgressSpinner
+],
   templateUrl: './order-main.component.html',
   styleUrl: './order-main.component.css'
 })

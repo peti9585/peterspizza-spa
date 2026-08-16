@@ -11,15 +11,17 @@
   <div class="spinner-container">
     <mat-spinner></mat-spinner>
   </div>
-}@else {
+  }@else {
   <div class="pizza-cards">
-    <div *ngFor="let pizzaDetail of pizzas.getAllPizzasResponses">
-      <app-order-pizza-card
-        [pizzaDetail]="pizzaDetail"
-        (addToCartEvent)="handleAddToCart($event)"
-        (countChanged)="handleCountChanged()">
-      </app-order-pizza-card>
-    </div>
+    @for (pizzaDetail of pizzas.getAllPizzasResponses; track pizzaDetail) {
+      <div>
+        <app-order-pizza-card
+          [pizzaDetail]="pizzaDetail"
+          (addToCartEvent)="handleAddToCart($event)"
+          (countChanged)="handleCountChanged()">
+        </app-order-pizza-card>
+      </div>
+    }
   </div>
 }
 
