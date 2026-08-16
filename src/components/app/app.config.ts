@@ -2,9 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import {provideRouter, withRouterConfig} from '@angular/router';
 
 import { routes } from './app.routes';
-import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {provideToastr} from 'ngx-toastr';
-import {provideAnimations} from '@angular/platform-browser/animations';
+import {provideHttpClient, withInterceptors, withXhr} from '@angular/common/http';
 import {authTokenInterceptor} from '../../interceptors/auth-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -12,9 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withRouterConfig({
       onSameUrlNavigation: 'reload'
     })),
-    provideAnimations(),
-    provideToastr(),
-    provideHttpClient(
+    provideHttpClient(withXhr(),
       withInterceptors([authTokenInterceptor])
     )],
 };

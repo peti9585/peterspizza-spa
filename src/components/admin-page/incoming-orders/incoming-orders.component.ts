@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -10,13 +10,10 @@ import {
 } from '@angular/material/table';
 import {AdminService} from '../../../services/admin.service';
 import {Admin, OrderState} from '../../../interfaces/interfaces-global';
-import IGetAllOrderResponse = Admin.IGetAllOrderResponse;
 import {MatButton} from '@angular/material/button';
-import IOrderItem = Admin.IOrderItem;
-import {ToastrService} from 'ngx-toastr';
-import IChangeOrderStateRequest = Admin.IChangeOrderStateRequest;
 import {SignalrAdminService} from '../../../services/signalr-admin.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-incoming-orders',
@@ -34,14 +31,15 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     MatButton
   ],
   templateUrl: './incoming-orders.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './incoming-orders.component.css'
 })
 export class IncomingOrdersComponent implements OnInit{
   displayedColumns: string[] = ['position', 'orderId', 'name', 'orderState', 'orderDate'];
-  dataSource: IGetAllOrderResponse[] = [];
+  dataSource: Admin.IGetAllOrderResponse[] = [];
 
   private readonly adminService = inject(AdminService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly signalRAdminService = inject(SignalrAdminService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -62,7 +60,13 @@ export class IncomingOrdersComponent implements OnInit{
         }));
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a rendelések betöltése során.', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a rendelések betöltése során.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
       }
     });
 
@@ -88,20 +92,20 @@ export class IncomingOrdersComponent implements OnInit{
 
   private expandedOrderId: number | null = null;
 
-  toggleRow(row: IOrderItem): void {
+  toggleRow(row: Admin.IOrderItem): void {
     this.expandedOrderId = (this.expandedOrderId === row.orderId) ? null : row.orderId;
   }
 
-  isExpanded(row: IOrderItem): boolean {
+  isExpanded(row: Admin.IOrderItem): boolean {
     return this.expandedOrderId === row.orderId;
   }
 
-  calculateSumOfOrderItems(orderItems: IOrderItem[]): number {
+  calculateSumOfOrderItems(orderItems: Admin.IOrderItem[]): number {
     return orderItems.reduce((acc, it) => acc + (it.price * it.quantity), 0);
   }
 
   changeOrderState(newOrderState: OrderState, orderId: string): void {
-    const request: IChangeOrderStateRequest = {
+    const request: Admin.IChangeOrderStateRequest = {
       orderId: orderId,
       newOrderState: newOrderState
     }
@@ -110,10 +114,24 @@ export class IncomingOrdersComponent implements OnInit{
         this.dataSource = this.dataSource.map(order =>
           order.orderId === orderId ? { ...order, orderState: newOrderState } : order
         );
-        this.toasterService.success('Sikeres státuszváltoztatás.', 'Siker');
+        this.toasterService.open(
+          'Sikeres státuszváltoztatás.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a rendelés státuszának változtatása során.', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a rendelés státuszának változtatása során.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       }
     });
   }

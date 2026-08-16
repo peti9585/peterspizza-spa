@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass, NgOptimizedImage} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
@@ -21,6 +21,7 @@ export enum ComponentType {
     RouterLink
   ],
   templateUrl: './description.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './description.component.css'
 })
 export class DescriptionComponent implements OnInit {

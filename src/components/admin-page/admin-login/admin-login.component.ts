@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {LoginComponent} from '../../login-page/login/login.component';
 import {LoginType} from '../../../interfaces/interfaces-global';
 
@@ -8,6 +8,7 @@ import {LoginType} from '../../../interfaces/interfaces-global';
     LoginComponent
   ],
   templateUrl: './admin-login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './admin-login.component.css'
 })
 export class AdminLoginComponent {

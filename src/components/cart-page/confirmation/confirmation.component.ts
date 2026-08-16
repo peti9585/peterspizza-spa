@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -6,11 +6,11 @@ import {PizzaService} from '../../../services/pizza.service';
 import {IOrderPizzasRequest} from '../../../interfaces/interfaces-global';
 import {CartService} from '../../../services/cart.service';
 import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
 import {MatDialogRef} from '@angular/material/dialog';
 import {UserService} from '../../../services/user.service';
-import {NgIf} from '@angular/common';
+
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-confirmation',
@@ -21,10 +21,10 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatLabel,
     ReactiveFormsModule,
     FormsModule,
-    NgIf,
-    MatProgressSpinner,
-  ],
+    MatProgressSpinner
+],
   templateUrl: './confirmation.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './confirmation.component.css'
 })
 export class ConfirmationComponent {
@@ -35,7 +35,7 @@ export class ConfirmationComponent {
   private readonly pizzaService = inject(PizzaService);
   private readonly userService = inject(UserService);
   private readonly cartService = inject(CartService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly router = inject(Router);
   private readonly dialogRef = inject(MatDialogRef<ConfirmationComponent>);
 
@@ -51,7 +51,14 @@ export class ConfirmationComponent {
         this.isLoading = false;
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a kérés során.', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a kérés során.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       }
     });
   }
@@ -63,10 +70,24 @@ export class ConfirmationComponent {
         this.cartService.removeAllFromCart();
         this.router.navigate(['/home']);
         this.dialogRef.close();
-        this.toasterService.success('A rendelés sikeres volt! A rendelés állapotát a fiók menüpontban követheted nyomon.');
+        this.toasterService.open(
+          'A rendelés sikeres volt! A rendelés állapotát a fiók menüpontban követheted nyomon.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       },
       error: (_) => {
-        this.toasterService.error("Hiba történt a rendelés leadása során.", "Hiba");
+        this.toasterService.open(
+          "Hiba történt a rendelés leadása során.",
+          "Bezár",
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
         this.dialogRef.close();
       }
     });

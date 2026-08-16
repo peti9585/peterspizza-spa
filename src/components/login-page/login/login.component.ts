@@ -1,11 +1,11 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {Router, RouterLink} from '@angular/router';
 import {ILoginData, LoginType} from '../../../interfaces/interfaces-global';
-import {ToastrService} from 'ngx-toastr';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +20,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
     RouterLink
   ],
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
@@ -29,7 +30,7 @@ export class LoginComponent {
 
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthenticationService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly router = inject(Router);
 
   constructor() {
@@ -49,14 +50,28 @@ export class LoginComponent {
 
       this.authService.submitLogin(loginData, this.loginType).subscribe({
         next: (_) => {
-          this.toasterService.success('Sikeresen bejelentkeztél az oldalra!', 'Sikeres bejelentkezés');
+          this.toasterService.open(
+            'Sikeresen bejelentkeztél az oldalra!',
+            'Bezár',
+            {
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            }
+            );
 
           this.loginType === LoginType.User
             ? this.router.navigate(['/home'])
             : this.router.navigate(['/admin/dashboard']);
         },
         error: (_) => {
-            this.toasterService.error('Hiba történt a bejelentkezés során!', 'Hiba');
+            this.toasterService.open(
+              'Hiba történt a bejelentkezés során!',
+              'Bezár',
+              {
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              }
+              );
         }
       });
     }

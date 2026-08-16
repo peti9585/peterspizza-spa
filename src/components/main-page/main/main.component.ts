@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {AboutComponent} from "../about/about.component";
 import {ComponentType, DescriptionComponent} from "../description/description.component";
 import {FooterComponent} from "../footer/footer.component";
@@ -15,6 +15,7 @@ import {IntroductionComponent} from "../introduction/introduction.component";
         IntroductionComponent
     ],
   templateUrl: './main.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './main.component.css'
 })
 export class MainComponent{

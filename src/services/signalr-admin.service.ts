@@ -3,7 +3,6 @@ import {HubConnection, HubConnectionBuilder} from '@microsoft/signalr';
 import {AuthenticationService} from './authentication.service';
 import {Subject} from 'rxjs';
 import {Admin} from '../interfaces/interfaces-global';
-import IGetAllOrdersResponse = Admin.IGetAllOrdersResponse;
 import {environment} from '../environments/environment';
 
 @Injectable({
@@ -11,7 +10,7 @@ import {environment} from '../environments/environment';
 })
 export class SignalrAdminService {
   private hubConnection!: HubConnection;
-  private adminOrdersChangedSubject = new Subject<IGetAllOrdersResponse>();
+  private adminOrdersChangedSubject = new Subject<Admin.IGetAllOrdersResponse>();
 
   private readonly authService = inject(AuthenticationService);
 
@@ -42,7 +41,7 @@ export class SignalrAdminService {
 
   public handleDisconnects = () => {
     if (!this.hubConnection) return;
-    
+
     this.hubConnection.onclose(() => {
       setTimeout(() => this.startConnection(), 3000);
     });

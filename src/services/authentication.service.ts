@@ -12,8 +12,8 @@ import {
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
 import {environment} from '../environments/environment';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class AuthenticationService {
 
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
 
   submitRegistration(registrationData: IRegistrationData) {
     return this.http.post(this.baseUrlForUser + '/register', registrationData);
@@ -63,7 +63,14 @@ export class AuthenticationService {
           } else {
             this.logout();
             this.router.navigate(['/login']);
-            this.toasterService.info('A munkamenet lejárt, kérlek jelentkezz be újra', 'Figyelem!');
+            this.toasterService.open(
+              'A munkamenet lejárt, kérlek jelentkezz be újra',
+              'Bezár',
+              {
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              }
+              );
           }
         })
       );

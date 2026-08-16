@@ -1,11 +1,11 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from '../../../services/user.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {ToastrService} from 'ngx-toastr';
 import {IUpdateUserRequest} from '../../../interfaces/interfaces-global';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile-data',
@@ -18,6 +18,7 @@ import {IUpdateUserRequest} from '../../../interfaces/interfaces-global';
     MatProgressSpinner
   ],
   templateUrl: './profile-data.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './profile-data.component.css'
 })
 export class ProfileDataComponent {
@@ -25,7 +26,7 @@ export class ProfileDataComponent {
   isLoading: boolean = true;
 
   private readonly userService = inject(UserService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly formBuilder = inject(FormBuilder);
 
   constructor() {
@@ -48,7 +49,14 @@ export class ProfileDataComponent {
         this.isLoading = false;
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a kérés során.', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a kérés során.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
         this.isLoading = false;
       }
     });
@@ -64,10 +72,24 @@ export class ProfileDataComponent {
 
     this.userService.updateUser(request).subscribe({
       next: (_) => {
-        this.toasterService.success('Sikeresen frissítetted az adataid.');
+        this.toasterService.open(
+          'Sikeresen frissítetted az adataid.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       },
       error: (error) => {
-        this.toasterService.error(`Hiba történt a kérés során: ${error.error.detail}`, 'Hiba');
+        this.toasterService.open(
+          `Hiba történt a kérés során: ${error.error.detail}`,
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       }
     });
   }
