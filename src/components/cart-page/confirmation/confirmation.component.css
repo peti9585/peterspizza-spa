@@ -17,7 +17,7 @@
 }
 
 .mat-mdc-progress-spinner {
-  --mdc-circular-progress-active-indicator-color: red;
+  --mat-progress-spinner-active-indicator-color: red;
 }
 
 .spinner-container {
