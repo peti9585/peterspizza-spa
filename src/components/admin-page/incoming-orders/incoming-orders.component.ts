@@ -10,11 +10,8 @@ import {
 } from '@angular/material/table';
 import {AdminService} from '../../../services/admin.service';
 import {Admin, OrderState} from '../../../interfaces/interfaces-global';
-import IGetAllOrderResponse = Admin.IGetAllOrderResponse;
 import {MatButton} from '@angular/material/button';
-import IOrderItem = Admin.IOrderItem;
 import {ToastrService} from 'ngx-toastr';
-import IChangeOrderStateRequest = Admin.IChangeOrderStateRequest;
 import {SignalrAdminService} from '../../../services/signalr-admin.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
@@ -38,7 +35,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 })
 export class IncomingOrdersComponent implements OnInit{
   displayedColumns: string[] = ['position', 'orderId', 'name', 'orderState', 'orderDate'];
-  dataSource: IGetAllOrderResponse[] = [];
+  dataSource: Admin.IGetAllOrderResponse[] = [];
 
   private readonly adminService = inject(AdminService);
   private readonly toasterService = inject(ToastrService);
@@ -88,20 +85,20 @@ export class IncomingOrdersComponent implements OnInit{
 
   private expandedOrderId: number | null = null;
 
-  toggleRow(row: IOrderItem): void {
+  toggleRow(row: Admin.IOrderItem): void {
     this.expandedOrderId = (this.expandedOrderId === row.orderId) ? null : row.orderId;
   }
 
-  isExpanded(row: IOrderItem): boolean {
+  isExpanded(row: Admin.IOrderItem): boolean {
     return this.expandedOrderId === row.orderId;
   }
 
-  calculateSumOfOrderItems(orderItems: IOrderItem[]): number {
+  calculateSumOfOrderItems(orderItems: Admin.IOrderItem[]): number {
     return orderItems.reduce((acc, it) => acc + (it.price * it.quantity), 0);
   }
 
   changeOrderState(newOrderState: OrderState, orderId: string): void {
-    const request: IChangeOrderStateRequest = {
+    const request: Admin.IChangeOrderStateRequest = {
       orderId: orderId,
       newOrderState: newOrderState
     }
