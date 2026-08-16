@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
@@ -18,6 +18,7 @@ import {IUpdateUserRequest} from '../../../interfaces/interfaces-global';
     MatProgressSpinner
   ],
   templateUrl: './profile-data.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './profile-data.component.css'
 })
 export class ProfileDataComponent {

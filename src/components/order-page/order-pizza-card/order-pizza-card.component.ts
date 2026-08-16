@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, Output, output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output, output, ChangeDetectionStrategy} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltip} from '@angular/material/tooltip';
 import {IGetPizzaResponse} from '../../../interfaces/interfaces-global';
@@ -11,6 +11,7 @@ import {CartService} from '../../../services/cart.service';
     MatTooltip
   ],
   templateUrl: './order-pizza-card.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './order-pizza-card.component.css'
 })
 export class OrderPizzaCardComponent {

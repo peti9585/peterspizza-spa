@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {OrderPizzaCardComponent} from '../order-pizza-card/order-pizza-card.component';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
@@ -20,6 +20,7 @@ import {CartService} from '../../../services/cart.service';
     MatProgressSpinner
 ],
   templateUrl: './order-main.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './order-main.component.css'
 })
 export class OrderMainComponent implements OnInit {

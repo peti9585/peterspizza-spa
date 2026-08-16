@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {Router, RouterLink} from '@angular/router';
 import {AuthenticationService} from '../../../services/authentication.service';
@@ -9,6 +9,7 @@ import {ToastrService} from 'ngx-toastr';
   selector: 'app-header',
   imports: [MatButtonModule, MatTooltipModule, RouterLink],
   templateUrl: './header.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {

@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
@@ -20,6 +20,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
     RouterLink
   ],
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.component.css'
 })
 export class LoginComponent {

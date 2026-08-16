@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
@@ -22,6 +22,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
   ],
   selector: 'app-registration',
   styleUrl: './registration.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './registration.component.html'
 })
 export class RegistrationComponent {

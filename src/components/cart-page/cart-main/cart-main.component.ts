@@ -2,7 +2,7 @@ import {MatTable, MatHeaderCell, MatCell, MatHeaderRow, MatRow, MatColumnDef, Ma
 import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
 import {Router, RouterLink} from '@angular/router';
-import {Component, OnInit, OnDestroy, Inject, inject, DOCUMENT} from '@angular/core';
+import {Component, OnInit, OnDestroy, Inject, inject, DOCUMENT, ChangeDetectionStrategy} from '@angular/core';
 
 import {DomSanitizer} from '@angular/platform-browser';
 import {PizzaService} from '../../../services/pizza.service';
@@ -39,6 +39,7 @@ interface Pizza {
     RouterLink,
   ],
   templateUrl: './cart-main.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './cart-main.component.css'
 })
 export class CartMainComponent implements OnInit, OnDestroy {

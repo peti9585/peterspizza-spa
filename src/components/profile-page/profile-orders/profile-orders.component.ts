@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -30,6 +30,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     MatProgressSpinner,
   ],
   templateUrl: './profile-orders.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './profile-orders.component.css'
 })
 export class ProfileOrdersComponent implements OnInit{

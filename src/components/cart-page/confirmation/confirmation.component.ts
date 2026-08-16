@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -24,6 +24,7 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatProgressSpinner
 ],
   templateUrl: './confirmation.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './confirmation.component.css'
 })
 export class ConfirmationComponent {

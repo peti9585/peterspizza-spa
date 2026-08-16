@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatDialog, MatDialogTitle} from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
 import {CookieService} from 'ngx-cookie-service';
@@ -7,6 +7,7 @@ import {CookieService} from 'ngx-cookie-service';
   selector: 'app-info-modal',
   imports: [MatDialogTitle, MatButton],
   templateUrl: './info-modal.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './info-modal.component.css'
 })
 export class InfoModalComponent {

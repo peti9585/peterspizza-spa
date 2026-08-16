@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {MatDrawer, MatDrawerContainer, MatDrawerContent} from '@angular/material/sidenav';
 import {MatButton} from '@angular/material/button';
 import {ProfileDataComponent} from '../profile-data/profile-data.component';
@@ -26,6 +26,7 @@ enum DrawerMode {
     RouterLink
   ],
   templateUrl: './profile-page.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './profile-page.component.css'
 })
 export class ProfilePageComponent {
