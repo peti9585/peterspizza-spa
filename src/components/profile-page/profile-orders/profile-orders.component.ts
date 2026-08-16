@@ -9,10 +9,10 @@ import {
   MatTable
 } from '@angular/material/table';
 import {PizzaService} from '../../../services/pizza.service';
-import {ToastrService} from 'ngx-toastr';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {SignalrService} from '../../../services/signalr.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile-orders',
@@ -39,7 +39,7 @@ export class ProfileOrdersComponent implements OnInit{
   isLoading: boolean = true;
 
   private readonly pizzaService = inject(PizzaService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly signalRService = inject(SignalrService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -80,7 +80,14 @@ export class ProfileOrdersComponent implements OnInit{
         this.isLoading = false;
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a kérés teljesítése során!', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a kérés teljesítése során!',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       }
     });
   }

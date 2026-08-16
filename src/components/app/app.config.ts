@@ -3,8 +3,6 @@ import {provideRouter, withRouterConfig} from '@angular/router';
 
 import { routes } from './app.routes';
 import {provideHttpClient, withInterceptors, withXhr} from '@angular/common/http';
-import {provideToastr} from 'ngx-toastr';
-import {provideAnimations} from '@angular/platform-browser/animations';
 import {authTokenInterceptor} from '../../interceptors/auth-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -12,9 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withRouterConfig({
       onSameUrlNavigation: 'reload'
     })),
-    provideAnimations(),
-    provideToastr(),
-    provideHttpClient(withXhr(), 
+    provideHttpClient(withXhr(),
       withInterceptors([authTokenInterceptor])
     )],
 };

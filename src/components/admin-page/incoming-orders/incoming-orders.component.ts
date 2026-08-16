@@ -11,9 +11,9 @@ import {
 import {AdminService} from '../../../services/admin.service';
 import {Admin, OrderState} from '../../../interfaces/interfaces-global';
 import {MatButton} from '@angular/material/button';
-import {ToastrService} from 'ngx-toastr';
 import {SignalrAdminService} from '../../../services/signalr-admin.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-incoming-orders',
@@ -39,7 +39,7 @@ export class IncomingOrdersComponent implements OnInit{
   dataSource: Admin.IGetAllOrderResponse[] = [];
 
   private readonly adminService = inject(AdminService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly signalRAdminService = inject(SignalrAdminService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -60,7 +60,13 @@ export class IncomingOrdersComponent implements OnInit{
         }));
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a rendelések betöltése során.', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a rendelések betöltése során.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
       }
     });
 
@@ -108,10 +114,24 @@ export class IncomingOrdersComponent implements OnInit{
         this.dataSource = this.dataSource.map(order =>
           order.orderId === orderId ? { ...order, orderState: newOrderState } : order
         );
-        this.toasterService.success('Sikeres státuszváltoztatás.', 'Siker');
+        this.toasterService.open(
+          'Sikeres státuszváltoztatás.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a rendelés státuszának változtatása során.', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a rendelés státuszának változtatása során.',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
       }
     });
   }

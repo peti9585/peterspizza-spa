@@ -4,8 +4,8 @@ import {MatButton} from '@angular/material/button';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {Router, RouterLink} from '@angular/router';
 import {IRegistrationData} from '../../../interfaces/interfaces-global';
-import {ToastrService} from 'ngx-toastr';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   imports: [
@@ -37,7 +37,7 @@ export class RegistrationComponent {
 
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthenticationService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly router = inject(Router);
 
   constructor() {
@@ -57,15 +57,36 @@ export class RegistrationComponent {
 
       this.authService.submitRegistration(registrationData).subscribe({
         next: (response) => {
-          this.toasterService.success('Sikeresen regisztráltál az oldalra!', 'Sikeres regisztráció');
+          this.toasterService.open(
+            'Sikeresen regisztráltál az oldalra!',
+            'Bezár',
+            {
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            }
+            );
 
           this.router.navigate(['/home']);
         },
         error: (error) => {
           if (error.status === 409) {
-            this.toasterService.info('A felhasználónév, telefonszám vagy e-mail cím már használatban van!', 'Hiba');
+            this.toasterService.open(
+              'A felhasználónév, telefonszám vagy e-mail cím már használatban van!',
+              'Bezár',
+              {
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              }
+              );
           } else {
-            this.toasterService.error('Hiba történt a regisztráció során!', 'Hiba');
+            this.toasterService.open(
+              'Hiba történt a regisztráció során!',
+              'Bezár',
+              {
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              }
+              );
           }
         }
       });

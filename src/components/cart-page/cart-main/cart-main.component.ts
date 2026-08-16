@@ -7,10 +7,10 @@ import {Component, OnInit, OnDestroy, Inject, inject, DOCUMENT, ChangeDetectionS
 import {DomSanitizer} from '@angular/platform-browser';
 import {PizzaService} from '../../../services/pizza.service';
 import {CartService} from '../../../services/cart.service';
-import {ToastrService} from 'ngx-toastr';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmationComponent} from '../confirmation/confirmation.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 interface Pizza {
   id: number;
@@ -52,7 +52,7 @@ export class CartMainComponent implements OnInit, OnDestroy {
   private readonly sanitizer = inject(DomSanitizer);
   private readonly cartService = inject(CartService);
   private readonly pizzaService = inject(PizzaService);
-  private readonly toasterService = inject(ToastrService);
+  private readonly toasterService = inject(MatSnackBar);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
 
@@ -150,7 +150,14 @@ export class CartMainComponent implements OnInit, OnDestroy {
         this.overallPrice = this.calculateOverallPrice();
       },
       error: (_) => {
-        this.toasterService.error('Hiba történt a pizzák lekérése során!', 'Hiba');
+        this.toasterService.open(
+          'Hiba történt a pizzák lekérése során!',
+          'Bezár',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          }
+          );
 
         this.dataSource = [];
       }
