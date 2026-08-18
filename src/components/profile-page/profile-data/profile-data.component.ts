@@ -36,13 +36,16 @@ export class ProfileDataComponent {
       phoneNumber: [{ value: '', disabled: true }],
       email: [{ value: '', disabled: true }]
     });
+  }
+
+  ngOnInit() {
     this.userService.getUserDetailsById().subscribe({
       next: (response) => {
         this.formGroup.patchValue({
-          firstName: response.firstName,
-          lastName: response.lastName,
-          phoneNumber: response.phoneNumber,
-          email: response.email
+            firstName: response.firstName,
+            lastName: response.lastName,
+            phoneNumber: response.phoneNumber,
+            email: response.email
           }
         );
         this.formGroup.enable();
@@ -56,7 +59,7 @@ export class ProfileDataComponent {
             horizontalPosition: 'center',
             verticalPosition: 'top'
           }
-          );
+        );
         this.isLoading = false;
       }
     });

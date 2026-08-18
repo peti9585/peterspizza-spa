@@ -39,7 +39,7 @@ export class ConfirmationComponent {
   private readonly router = inject(Router);
   private readonly dialogRef = inject(MatDialogRef<ConfirmationComponent>);
 
-  constructor() {
+  ngOnInit() {
     this.userService.getUserDetailsById().subscribe({
       next: (response) => {
         this.formGroup = this.formBuilder.group({
@@ -58,7 +58,7 @@ export class ConfirmationComponent {
             horizontalPosition: 'center',
             verticalPosition: 'top'
           }
-          );
+        );
       }
     });
   }
