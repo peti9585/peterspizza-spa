@@ -1,4 +1,4 @@
-name: Angular Build
+name: Angular Build/Run unit-tests
 
 # {1}
 on:
