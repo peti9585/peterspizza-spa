@@ -52,7 +52,7 @@ describe('ConfirmationComponent', () => {
         { provide: CartService, useValue: cartServiceMock },
         { provide: PizzaService, useValue: pizzaServiceMock },
         { provide: Router, useValue: routerMock },
-      ]
+      ],
     })
     .compileComponents();
 

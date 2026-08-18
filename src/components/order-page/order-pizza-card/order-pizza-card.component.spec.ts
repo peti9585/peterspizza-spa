@@ -8,12 +8,20 @@ describe('OrderPizzaCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrderPizzaCardComponent]
+      imports: [OrderPizzaCardComponent],
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(OrderPizzaCardComponent);
     component = fixture.componentInstance;
+
+    component.pizzaDetail = {
+      pizzaId: 1,
+      pizzaName: 'Margherita',
+      description: 'Temp description',
+      pizzaImageBytes: '123'
+    };
+
     fixture.detectChanges();
   });
 

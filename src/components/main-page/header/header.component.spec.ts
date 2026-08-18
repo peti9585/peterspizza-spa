@@ -3,6 +3,7 @@ import { HeaderComponent } from './header.component';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
+import {PizzaService} from '../../../services/pizza.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -25,6 +26,9 @@ describe('HeaderComponent', () => {
       queryParams: {}
     }
   };
+  const pizzaServiceMock = {
+    getAll: vi.fn().mockName('getAll').mockReturnValue('')
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -34,7 +38,8 @@ describe('HeaderComponent', () => {
         { provide: MatSnackBar, useValue: toasterServiceMock },
         { provide: Router, useValue: routerMock },
         { provide: ActivatedRoute, useValue: activatedRouteMock },
-      ]
+        { provide: PizzaService, useValue: pizzaServiceMock },
+      ],
     })
     .compileComponents();
 

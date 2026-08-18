@@ -1,14 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
+import {ActivatedRoute} from '@angular/router';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
   let fixture: ComponentFixture<RegistrationComponent>;
 
+  const activatedRouteMock = {
+    snapshot: {
+      params: {},
+      queryParams: {}
+    }
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegistrationComponent]
+      imports: [RegistrationComponent],
+      providers: [
+        { provide: ActivatedRoute, useValue: activatedRouteMock },
+      ],
     })
     .compileComponents();
 

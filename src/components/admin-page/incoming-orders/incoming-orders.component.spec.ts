@@ -66,17 +66,17 @@ describe('IncomingOrdersComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [IncomingOrdersComponent],
-            providers: [
-              { provide: AdminService, useValue: adminServiceMock },
-              { provide: MatSnackBar, useValue: toasterServiceMock },
-            ]
+          imports: [IncomingOrdersComponent],
+          providers: [
+            { provide: AdminService, useValue: adminServiceMock },
+            { provide: MatSnackBar, useValue: toasterServiceMock },
+          ],
         })
             .compileComponents();
 
         fixture = TestBed.createComponent(IncomingOrdersComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
+        vi.clearAllMocks();
     });
 
     it('should create', () => {

@@ -8,6 +8,8 @@ describe('AuthenticationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(AuthenticationService);
+
+    vi.clearAllMocks();
   });
 
   it('should be created', () => {

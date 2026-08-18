@@ -15,7 +15,7 @@ describe('InfoModalComponent', () => {
       imports: [InfoModalComponent],
       providers: [
         { provide: CookieService, useValue: cookieServiceMock },
-      ]
+      ],
     })
     .compileComponents();
 

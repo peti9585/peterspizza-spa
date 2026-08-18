@@ -34,7 +34,7 @@ describe('LoginComponent', () => {
         { provide: AuthenticationService, useValue: authServiceMock },
         { provide: Router, useValue: routerMock },
         { provide: MatSnackBar, useValue: toasterServiceMock },
-      ]
+      ],
     })
     .compileComponents();
 

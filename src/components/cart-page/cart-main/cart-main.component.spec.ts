@@ -57,7 +57,7 @@ describe('CartMainComponent', () => {
         { provide: Router, useValue: routerMock },
         { provide: ActivatedRoute, useValue: activatedRouteMock },
         { provide: MatSnackBar, useValue: toasterServiceMock },
-      ]
+      ],
     })
     .compileComponents();
 
