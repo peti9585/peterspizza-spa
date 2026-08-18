@@ -3,8 +3,9 @@ import { IncomingOrdersComponent } from './incoming-orders.component';
 import { AdminService } from '../../../services/admin.service';
 import { Admin, OrderState } from '../../../interfaces/interfaces-global';
 import { vi } from 'vitest';
-import {of } from 'rxjs';
-import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import { of, Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SignalrAdminService } from '../../../services/signalr-admin.service';
 
 describe('IncomingOrdersComponent', () => {
     let component: IncomingOrdersComponent;
@@ -58,11 +59,18 @@ describe('IncomingOrdersComponent', () => {
     };
 
     const adminServiceMock = {
-        getAllOrders: vi.fn().mockName('getAllOrders').mockReturnValue(of(incomingOrders))
+        getAllOrders: vi.fn().mockName('getAllOrders').mockReturnValue(of(incomingOrders)),
+        changeOrderState: vi.fn().mockName('changeOrderState').mockReturnValue(of({})),
     };
     const toasterServiceMock = {
-      open: vi.fn().mockName('open').mockReturnValue(of(MatSnackBarRef)),
-    }
+      open: vi.fn().mockName('open'),
+    };
+    const signalRAdminServiceMock = {
+      startConnection: vi.fn().mockName('startConnection').mockResolvedValue(undefined),
+      addMessageListener: vi.fn().mockName('addMessageListener'),
+      handleDisconnects: vi.fn().mockName('handleDisconnects'),
+      adminOrdersChanged$: new Subject(),
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -70,6 +78,7 @@ describe('IncomingOrdersComponent', () => {
           providers: [
             { provide: AdminService, useValue: adminServiceMock },
             { provide: MatSnackBar, useValue: toasterServiceMock },
+            { provide: SignalrAdminService, useValue: signalRAdminServiceMock },
           ],
         })
             .compileComponents();
