@@ -3,7 +3,9 @@ name: Angular Build
 # {1}
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+      - feature/**
   pull_request:
     branches: [ "feature/**" ]
 
