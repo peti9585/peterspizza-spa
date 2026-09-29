@@ -58,7 +58,16 @@ describe('HeaderComponent', () => {
     component.logout();
 
     expect(authServiceMock.logout).toHaveBeenCalled();
-    expect(toasterServiceMock.open).toHaveBeenCalled();
     expect(routerMock.navigate).toHaveBeenCalledWith(['/home']);
+    expect(toasterServiceMock.open).toHaveBeenCalledWith(
+      'Sikeresen kijelentkeztél az oldalról.',
+      '',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      }
+    );
   });
 });

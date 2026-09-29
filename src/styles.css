@@ -33,6 +33,38 @@ h1 {
   color: var(--text-dark-red);
 }
 
+ .success-snackbar .mat-mdc-snackbar-surface {
+   background-color: #4caf50 !important;
+   text-align: center;
+   color: white;
+ }
+
+ .error-snackbar .mat-mdc-snackbar-surface {
+   background-color: #f44336 !important;
+   color: white;
+ }
+
+ .error-snackbar .mat-mdc-button-persistent-ripple {
+   background-color: #323333;
+ }
+
+ .error-snackbar .mdc-button__label {
+   color: white;
+ }
+
+ .warning-snackbar .mat-mdc-snackbar-surface {
+   background-color: #ff9800 !important;
+   color: black;
+ }
+
+ .warning-snackbar .mat-mdc-button-persistent-ripple{
+   background-color: #323333;
+ }
+
+ .warning-snackbar .mdc-button__label {
+   color: white;
+ }
+
  @media only screen and (max-width: 768px) {
    body {
      margin-left: 0;

@@ -3,18 +3,23 @@
   flex-direction: row;
 }
 
-.desc-item img {
-  width: calc(50vw - 100px);
-  object-fit: cover;
-  height: 700px;
-}
-
 .desc-item {
-  text-align: center;
+  width: 50%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  text-align: center;
+}
+
+.desc-item img {
+  display: block;
+  width: 100%;
+  max-width: calc(50vw - 100px);
+  height: 700px;
+  object-fit: cover;
 }
 
 .desc-item h3 {
@@ -23,7 +28,8 @@
   color: var(--text-dark-red);
 }
 
-.desc-item h3, p {
+.desc-item h3,
+.desc-item p {
   margin-left: var(--margin-default);
   margin-right: var(--margin-default);
 }
@@ -43,8 +49,17 @@
 @media screen and (max-width: 1200px) {
   .desc {
     flex-wrap: wrap;
-    text-align: center;
     justify-content: center;
+    text-align: center;
+  }
+
+  .desc-item {
+    width: 100%;
+  }
+
+  .desc-item img {
+    max-width: 100%;
+    height: auto;
   }
 
   .desc-item.mindfulness-image {

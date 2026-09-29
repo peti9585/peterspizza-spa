@@ -85,7 +85,8 @@ export class ProfileOrdersComponent implements OnInit{
           'Bezár',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           }
           );
       }

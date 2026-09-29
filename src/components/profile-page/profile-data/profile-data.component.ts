@@ -57,7 +57,8 @@ export class ProfileDataComponent {
           'Bezár',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           }
         );
         this.isLoading = false;
@@ -77,20 +78,23 @@ export class ProfileDataComponent {
       next: (_) => {
         this.toasterService.open(
           'Sikeresen frissítetted az adataid.',
-          'Bezár',
+          '',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: ['success-snackbar']
           }
           );
       },
       error: (error) => {
         this.toasterService.open(
-          `Hiba történt a kérés során: ${error.error.detail}`,
+          `Hiba történt a kérés során!`,
           'Bezár',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           }
           );
       }

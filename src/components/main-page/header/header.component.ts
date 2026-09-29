@@ -29,13 +29,14 @@ export class HeaderComponent {
     this.authService.logout();
     this.toasterService.open(
       'Sikeresen kijelentkeztél az oldalról.',
-      'Bezár',
+      '',
       {
         horizontalPosition: 'center',
-        verticalPosition: 'top'
-      }
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      },
       );
     this.router.navigate(['/home']);
   }
-
 }

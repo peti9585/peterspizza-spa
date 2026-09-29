@@ -52,10 +52,12 @@ export class LoginComponent {
         next: (_) => {
           this.toasterService.open(
             'Sikeresen bejelentkeztél az oldalra!',
-            'Bezár',
+            '',
             {
               horizontalPosition: 'center',
-              verticalPosition: 'top'
+              verticalPosition: 'top',
+              duration: 3000,
+              panelClass: ['success-snackbar']
             }
             );
 
@@ -69,7 +71,8 @@ export class LoginComponent {
               'Bezár',
               {
                 horizontalPosition: 'center',
-                verticalPosition: 'top'
+                verticalPosition: 'top',
+                panelClass: ['error-snackbar']
               }
               );
         }

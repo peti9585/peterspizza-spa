@@ -115,7 +115,15 @@ describe('CartMainComponent', () => {
     // Assert
     expect(cartServiceMock.getCounts).toHaveBeenCalled();
     expect(pizzaServiceMock.getPizzasByIds).toHaveBeenCalledWith([1, 2, 3]);
-    expect(toasterServiceMock.open).toHaveBeenCalled();
+    expect(toasterServiceMock.open).toHaveBeenCalledWith(
+      'Hiba történt a pizzák lekérése során!',
+      'Bezár',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      }
+    );
     expect(component.isLoading).toBeTruthy();
     expect(component.dataSource).toEqual([]);
   });
