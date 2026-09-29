@@ -92,7 +92,15 @@ describe('ProfileDataComponent', () => {
     expect(form.get('phoneNumber')?.value).toBe('');
     expect(form.get('email')?.value).toBe('');
 
-    expect(toasterMock.open).toHaveBeenCalled();
+    expect(toasterMock.open).toHaveBeenCalledWith(
+      'Hiba történt a kérés során.',
+      'Bezár',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      }
+    );
   });
 
   it('should send user update request based on form values', () => {
@@ -110,6 +118,35 @@ describe('ProfileDataComponent', () => {
 
     // Assert
     expect(userServiceMock.updateUser).toHaveBeenCalledWith(expectedRequest);
-    expect(toasterMock.open).toHaveBeenCalled();
+    expect(toasterMock.open).toHaveBeenCalledWith(
+      'Sikeresen frissítetted az adataid.',
+      '',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      }
+    );
+  });
+
+  it('should pop an error toaster when the update request failed', () => {
+    // Arrange
+    userServiceMock.updateUser.mockReturnValueOnce(throwError(() => new Error('Error')));
+
+    // Act
+    fixture.detectChanges();
+    component.sendUpdateRequest();
+
+    // Assert
+    expect(toasterMock.open).toHaveBeenCalledWith(
+      'Hiba történt a kérés során!',
+      'Bezár',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      }
+    );
   });
 });

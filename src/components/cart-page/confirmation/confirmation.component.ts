@@ -56,7 +56,8 @@ export class ConfirmationComponent {
           'Bezár',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           }
         );
       }
@@ -72,10 +73,12 @@ export class ConfirmationComponent {
         this.dialogRef.close();
         this.toasterService.open(
           'A rendelés sikeres volt! A rendelés állapotát a fiók menüpontban követheted nyomon.',
-          'Bezár',
+          '',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: ['success-snackbar']
           }
           );
       },
@@ -85,7 +88,8 @@ export class ConfirmationComponent {
           "Bezár",
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           }
           );
         this.dialogRef.close();

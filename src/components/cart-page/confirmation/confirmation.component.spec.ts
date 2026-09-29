@@ -91,7 +91,15 @@ describe('ConfirmationComponent', () => {
     fixture.detectChanges();
 
     // Assert
-    expect(toasterServiceMock.open).toHaveBeenCalled();
+    expect(toasterServiceMock.open).toHaveBeenCalledWith(
+      'Hiba történt a kérés során.',
+      'Bezár',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      }
+    );
     expect(component.isLoading).toBeTruthy();
   });
 
@@ -123,7 +131,16 @@ describe('ConfirmationComponent', () => {
     expect(pizzaServiceMock.sendOrder).toHaveBeenCalledWith(expectedOrderPizzasRequest);
     expect(cartServiceMock.removeAllFromCart).toHaveBeenCalled();
     expect(routerMock.navigate).toHaveBeenCalledWith(['/home']);
-    expect(toasterServiceMock.open).toHaveBeenCalled();
+    expect(toasterServiceMock.open).toHaveBeenCalledWith(
+      'A rendelés sikeres volt! A rendelés állapotát a fiók menüpontban követheted nyomon.',
+      '',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      }
+    );
   });
 
   it('should pop a toaster when the order fails', () => {
@@ -146,6 +163,14 @@ describe('ConfirmationComponent', () => {
     expect(pizzaServiceMock.sendOrder).toHaveBeenCalledWith(expectedOrderPizzasRequest);
     expect(cartServiceMock.removeAllFromCart).not.toHaveBeenCalled();
     expect(routerMock.navigate).not.toHaveBeenCalled();
-    expect(toasterServiceMock.open).toHaveBeenCalled();
+    expect(toasterServiceMock.open).toHaveBeenCalledWith(
+      'Hiba történt a rendelés leadása során.',
+      'Bezár',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      }
+    );
   });
 });

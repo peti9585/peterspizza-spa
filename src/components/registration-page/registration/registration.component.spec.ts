@@ -175,8 +175,13 @@ describe('RegistrationComponent', () => {
       // Assert
       expect(toasterMock.open).toHaveBeenCalledWith(
         'Sikeresen regisztráltál az oldalra!',
-        'Bezár',
-        expect.objectContaining({ horizontalPosition: 'center', verticalPosition: 'top' })
+        '',
+        {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        }
       );
     });
 
@@ -204,7 +209,11 @@ describe('RegistrationComponent', () => {
       expect(toasterMock.open).toHaveBeenCalledWith(
         'A felhasználónév, telefonszám vagy e-mail cím már használatban van!',
         'Bezár',
-        expect.objectContaining({ horizontalPosition: 'center', verticalPosition: 'top' })
+        {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['warning-snackbar']
+        }
       );
     });
 
@@ -221,7 +230,11 @@ describe('RegistrationComponent', () => {
       expect(toasterMock.open).toHaveBeenCalledWith(
         'Hiba történt a regisztráció során!',
         'Bezár',
-        expect.objectContaining({ horizontalPosition: 'center', verticalPosition: 'top' })
+        {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar']
+        }
       );
     });
 

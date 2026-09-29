@@ -59,10 +59,12 @@ export class RegistrationComponent {
         next: (response) => {
           this.toasterService.open(
             'Sikeresen regisztráltál az oldalra!',
-            'Bezár',
+            '',
             {
               horizontalPosition: 'center',
-              verticalPosition: 'top'
+              verticalPosition: 'top',
+              duration: 3000,
+              panelClass: ['success-snackbar']
             }
             );
 
@@ -75,7 +77,8 @@ export class RegistrationComponent {
               'Bezár',
               {
                 horizontalPosition: 'center',
-                verticalPosition: 'top'
+                verticalPosition: 'top',
+                panelClass: ['warning-snackbar']
               }
               );
           } else {
@@ -84,7 +87,8 @@ export class RegistrationComponent {
               'Bezár',
               {
                 horizontalPosition: 'center',
-                verticalPosition: 'top'
+                verticalPosition: 'top',
+                panelClass: ['error-snackbar']
               }
               );
           }

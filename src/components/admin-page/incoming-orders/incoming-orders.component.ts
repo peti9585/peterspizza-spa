@@ -65,7 +65,8 @@ export class IncomingOrdersComponent implements OnInit{
           'Bezár',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           });
       }
     });
@@ -116,10 +117,12 @@ export class IncomingOrdersComponent implements OnInit{
         );
         this.toasterService.open(
           'Sikeres státuszváltoztatás.',
-          'Bezár',
+          '',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            duration: 3000,
+            panelClass: ['success-snackbar']
           }
           );
       },
@@ -129,7 +132,8 @@ export class IncomingOrdersComponent implements OnInit{
           'Bezár',
           {
             horizontalPosition: 'center',
-            verticalPosition: 'top'
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
           }
           );
       }

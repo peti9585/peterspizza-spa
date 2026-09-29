@@ -65,10 +65,11 @@ export class AuthenticationService {
             this.router.navigate(['/login']);
             this.toasterService.open(
               'A munkamenet lejárt, kérlek jelentkezz be újra',
-              'Bezár',
+              '',
               {
                 horizontalPosition: 'center',
-                verticalPosition: 'top'
+                verticalPosition: 'top',
+                panelClass: ['warning-snackbar']
               }
               );
           }

@@ -97,8 +97,17 @@ describe('LoginComponent', () => {
 
     // Assert
     expect(authServiceMock.submitLogin).toHaveBeenCalledWith(expectedLoginRequest, component.loginType);
-    expect(toasterServiceMock.open).toHaveBeenCalled();
     expect(routerMock.navigate).toHaveBeenCalled();
+    expect(toasterServiceMock.open).toHaveBeenCalledWith(
+      'Sikeresen bejelentkeztél az oldalra!',
+      '',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      }
+    );
   });
 
   it('should navigate to user homepage in case login type is user', () => {
@@ -147,6 +156,14 @@ describe('LoginComponent', () => {
 
     // Assert
     expect(routerMock.navigate).not.toHaveBeenCalled();
-    expect(toasterServiceMock.open).toHaveBeenCalled();
+    expect(toasterServiceMock.open).toHaveBeenCalledWith(
+      'Hiba történt a bejelentkezés során!',
+      'Bezár',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      }
+    );
   });
 });
